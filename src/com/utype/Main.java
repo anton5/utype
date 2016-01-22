@@ -1,17 +1,9 @@
 package com.utype;
 
 import java.util.Scanner;
-import com.utype.AntonGame;
 
 public class Main {
     public static void main(String[] args) {
-
-        AntonGame g = new AntonGame();
-        g.run();
-
-        System.out.println("Hello world!");
-        System.out.println("Hello again!");
-        System.out.println("I love you, world!");
 
         Player player = new Player("John Smith");
         Scanner scanner = new Scanner(System.in);
