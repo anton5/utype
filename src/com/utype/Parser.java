@@ -1,6 +1,7 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.locations.Location;
 
 /**
  * U-type
