@@ -25,7 +25,6 @@ public class Logger {
         log(string + "\n");
     }
 
-    public 
 
     public static void log(@NonNull String string) {
 
