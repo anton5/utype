@@ -40,13 +40,34 @@ public class Location {
     }
 
     public void setLocationInDirection(@NonNull Direction direction, @Nullable Location location) {
+
         locations.put(direction, location);
+
+        if (location.getLocationInDirection(direction.opposite()) != this) {
+            location.setLocationInDirection(direction.opposite(), this);
+        }
     }
 
     public enum Direction {
         NORTH,
         WEST,
         SOUTH,
-        EAST
+        EAST;
+
+        public Direction opposite() {
+
+            switch (this) {
+                case NORTH:
+                    return SOUTH;
+                case WEST:
+                    return EAST;
+                case SOUTH:
+                    return NORTH;
+                case EAST:
+                    return WEST;
+            }
+
+            return null;
+        }
     }
 }
