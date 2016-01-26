@@ -8,7 +8,6 @@ public class Main {
         Player player = new Player("John Smith");
         Scanner scanner = new Scanner(System.in);
 
-
         // region Locations
 
         Location room1 = new Location("Room 1");
