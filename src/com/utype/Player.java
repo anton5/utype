@@ -2,6 +2,8 @@ package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
 
+import java.util.HashMap;
+
 /**
  * U-type
  *
@@ -11,6 +13,7 @@ public class Player {
 
     private Location currentLocation;
     private String name;
+    private HashMap<String, Loot> loot;
 
     public Player(@NonNull String name) {
         this.name = name;
