@@ -1,0 +1,104 @@
+package com.utype;
+
+import com.sun.javafx.beans.annotations.NonNull;
+
+/**
+ * U-type
+ * <p/>
+ * Created by Roman Laitarenko on 1/26/16.
+ */
+public class Game implements Runnable, InputManager.EventListener{
+
+    private Thread thread;
+    private Player player;
+
+    public Game(@NonNull Player player) {
+        this.player = player;
+    }
+
+    public Thread getThread() {
+
+        if (thread == null) {
+            thread = new Thread(this);
+        }
+
+        return thread;
+    }
+
+    public void start() {
+
+        getThread().start();
+    }
+
+    public void stop() {
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void run() {
+
+        // region Locations
+
+        Location room1 = new Location("Room 1");
+        Location room2 = new Location("Room 2");
+        Location room3 = new Location("Room 3");
+        Location room4 = new Location("Room 4");
+        Location hall = new Location("Main hall");
+
+        hall.setLocationInDirection(Location.Direction.NORTH, room1);
+        room1.setLocationInDirection(Location.Direction.NORTH, room2);
+        room2.setLocationInDirection(Location.Direction.EAST, room3);
+        room3.setLocationInDirection(Location.Direction.SOUTH, room4);
+        room4.setLocationInDirection(Location.Direction.WEST, hall);
+
+        // endregion
+
+        player.setCurrentLocation(hall);
+
+        Logger.log("You start at main hall, type 'n w e s' to navigate, 'c' to show current location");
+    }
+
+    @Override
+    public void onReceiveUserInput(String input) {
+
+        Object output = Parser.parse(input);
+
+        if (output == null) {
+
+            Logger.logln("Cannot parse input!");
+            return;
+        }
+
+        if (output instanceof Location.Direction) {
+
+            Location.Direction direction = (Location.Direction) output;
+
+            if (!player.move(direction)) {
+
+                Logger.log("Cannot go there");
+                return;
+            }
+
+            Logger.log(player.getName() + " now in " + player.getCurrentLocation().getName());
+        }
+
+        if (output instanceof Parser.Command) {
+
+            Parser.Command command = (Parser.Command) output;
+
+            switch (command) {
+                case SHOW_LOCATION:
+                    Logger.log("You are at " + player.getCurrentLocation().getName());
+                    break;
+
+            }
+        }
+
+    }
+}
