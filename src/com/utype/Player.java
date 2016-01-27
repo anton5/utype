@@ -1,6 +1,7 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.locations.Location;
 
 import java.util.HashMap;
 
@@ -42,6 +43,7 @@ public class Player {
         }
 
         setCurrentLocation(destination);
+        destination.onPlayerEntered(this);
 
         return true;
     }

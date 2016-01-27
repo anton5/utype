@@ -1,6 +1,8 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.locations.Location;
+import com.utype.locations.PiPuzzleRoom;
 
 /**
  * U-type
@@ -45,7 +47,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
         // region Locations
 
-        Location room1 = new Location("Room 1");
+        Location room1 = new PiPuzzleRoom("Room 1");
         Location room2 = new Location("Room 2");
         Location room3 = new Location("Room 3");
         Location room4 = new Location("Room 4");
@@ -61,11 +63,16 @@ public class Game implements Runnable, InputManager.EventListener{
 
         player.setCurrentLocation(hall);
 
-        Logger.log("You start at main hall, type 'n w e s' to navigate, 'c' to show current location");
+        Logger.logln("You start at main hall, type 'n w e s' to navigate, 'c' to show current location");
     }
 
     @Override
     public void onReceiveUserInput(String input) {
+
+        // give chance for the current location to process the input
+        if (player.getCurrentLocation().processInput(input)) {
+            return;
+        }
 
         Object output = Parser.parse(input);
 
@@ -81,11 +88,11 @@ public class Game implements Runnable, InputManager.EventListener{
 
             if (!player.move(direction)) {
 
-                Logger.log("Cannot go there");
+                Logger.logln("Cannot go there");
                 return;
             }
 
-            Logger.log(player.getName() + " now in " + player.getCurrentLocation().getName());
+            Logger.logln(player.getName() + " now in " + player.getCurrentLocation().getName());
         }
 
         if (output instanceof Parser.Command) {
@@ -94,7 +101,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
             switch (command) {
                 case SHOW_LOCATION:
-                    Logger.log("You are at " + player.getCurrentLocation().getName());
+                    Logger.logln("You are at " + player.getCurrentLocation().getName());
                     break;
 
             }

@@ -1,7 +1,8 @@
-package com.utype;
+package com.utype.locations;
 
 import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,6 +47,14 @@ public class Location {
         if (location.getLocationInDirection(direction.opposite()) != this) {
             location.setLocationInDirection(direction.opposite(), this);
         }
+    }
+
+    public boolean processInput(String input) {
+        return false;
+    }
+
+    public void onPlayerEntered(Player player) {
+
     }
 
     public enum Direction {
