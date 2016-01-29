@@ -1,10 +1,11 @@
 package com.utype;
 
 import com.sun.deploy.util.StringUtils;
+import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
 
 import javax.swing.*;
-import java.util.ArrayList;
+import javax.swing.text.JTextComponent;
 import java.util.Arrays;
 
 /**
@@ -15,10 +16,18 @@ import java.util.Arrays;
 public class Logger {
     private static final String CARET_INDICATOR = "> ";
 
-    private static JTextArea mainTextArea;
+    private static JTextPane mainTextComponent;
+    private static JTextComponent auxiliaryTextComponent;
+    private static JTextComponent inputTextComponent;
 
-    public static void initialize(JTextArea textArea) {
-        mainTextArea = textArea;
+    public static void initialize(JTextPane mainTextComponent,
+                                  JTextComponent auxiliaryTextComponent,
+                                  JTextComponent inputTextComponent) {
+        Logger.mainTextComponent = mainTextComponent;
+        Logger.auxiliaryTextComponent = auxiliaryTextComponent;
+        Logger.inputTextComponent = inputTextComponent;
+
+        logToInputField(CARET_INDICATOR);
     }
 
     public static  void logln(@NonNull String  string) {
@@ -30,7 +39,7 @@ public class Logger {
 
         if (string.equals("\n")) {
 
-            String[] rows = mainTextArea.getText().split("\n");
+            String[] rows = mainTextComponent.getText().split("\n");
             String lastRow = rows[rows.length - 1];
 
             lastRow = lastRow.replace(CARET_INDICATOR, "");
@@ -39,16 +48,16 @@ public class Logger {
 
             String newText = StringUtils.join(Arrays.asList(rows), "\n");
 
-            mainTextArea.setText(newText);
-            mainTextArea.append(string);
-
-//            if (!string.endsWith("\n")) {
-                mainTextArea.append(CARET_INDICATOR);
-//            }
+            mainTextComponent.setText(newText + string);
 
             return;
         }
 
-        mainTextArea.append(string);
+        mainTextComponent.setText(mainTextComponent.getText() + string);
+    }
+
+    public static void logToInputField(@Nullable String input) {
+
+        inputTextComponent.setText(input);
     }
 }

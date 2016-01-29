@@ -13,7 +13,9 @@ public class Main {
         Player player = new Player("John Smith");
         Game game = new Game(player);
 
-        Logger.initialize(dialog.getMainTextArea());
+        Logger.initialize(dialog.getMainTextPane(),
+                dialog.getAuxiliaryTextPane(),
+                dialog.getInputTextField());
 
         dialog.addKeyListener(inputManager);
         inputManager.setListener(game);

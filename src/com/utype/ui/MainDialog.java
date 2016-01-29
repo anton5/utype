@@ -9,11 +9,21 @@ import java.awt.event.*;
 
 public class MainDialog extends JDialog {
     private JPanel contentPane;
-    private JTextArea textArea1;
-    private JTextArea textArea2;
+    private JTextField inputTextField;
+    private JTextPane mainTextPane;
+    private JTextPane auxiliaryTextPane;
+    private JPanel auxiliaryPanel;
 
-    public JTextArea getMainTextArea() {
-        return textArea1;
+    public JTextPane getMainTextPane() {
+        return mainTextPane;
+    }
+
+    public JTextPane getAuxiliaryTextPane() {
+        return auxiliaryTextPane;
+    }
+
+    public JTextField getInputTextField() {
+        return inputTextField;
     }
 
     public MainDialog() {
@@ -28,9 +38,7 @@ public class MainDialog extends JDialog {
             }
         });
 
-        textArea1.setWrapStyleWord(true);
-        textArea1.setLineWrap(true);
-        ((DefaultCaret) textArea1.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        ((DefaultCaret) mainTextPane.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         setPreferredSize(new Dimension(800, 600));
         setFocusable(true);

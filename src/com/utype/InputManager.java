@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
  * Created by Roman Laitarenko on 1/25/16.
  */
 public class InputManager implements KeyListener {
+    private static final String CARET_INDICATOR = ">";
 
     private EventListener listener;
     private boolean isRunning;
@@ -33,7 +34,6 @@ public class InputManager implements KeyListener {
     public void start() {
 
         isRunning = true;
-
     }
 
     public void stop() {
@@ -48,21 +48,25 @@ public class InputManager implements KeyListener {
             return;
         }
 
-        Logger.log(String.valueOf(e.getKeyChar()));
-
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
 
-            String command = commandBuffer.toString();
+            String command = commandBuffer.toString().trim();
 
             notifyListenerWithString(command);
 
             // clears the buffer
             commandBuffer.setLength(0);
+        }
 
-        } else  {
+        if (e.getKeyChar() == KeyEvent.VK_BACK_SPACE && commandBuffer.length() > 0) {
+            commandBuffer.deleteCharAt(commandBuffer.length() - 1);
+        }
 
+        if (!e.isActionKey() && e.getKeyChar() != KeyEvent.VK_BACK_SPACE) {
             commandBuffer.append(e.getKeyChar());
         }
+
+        Logger.logToInputField(CARET_INDICATOR + commandBuffer.toString());
     }
 
     @Override
