@@ -1,6 +1,7 @@
 package com.utype;
 
 import com.utype.ui.MainDialog;
+import com.utype.ui.UIManager;
 
 public class Main {
 
@@ -16,6 +17,8 @@ public class Main {
         Logger.initialize(dialog.getMainTextPane(),
                 dialog.getAuxiliaryTextPane(),
                 dialog.getInputTextField());
+        UIManager.initialize(dialog);
+        UIManager.setIsAuxiliaryTextComponentVisible(false);
 
         dialog.addKeyListener(inputManager);
         inputManager.setListener(game);

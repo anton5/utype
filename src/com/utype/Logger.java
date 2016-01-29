@@ -1,12 +1,10 @@
 package com.utype;
 
-import com.sun.deploy.util.StringUtils;
 import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
-import java.util.Arrays;
 
 /**
  * U-type
@@ -31,29 +29,28 @@ public class Logger {
     }
 
     public static  void logln(@NonNull String  string) {
-        log(string + "\n");
+        log((string == null ? "" : string) + "\n");
     }
 
 
     public static void log(@NonNull String string) {
 
-        if (string.equals("\n")) {
-
-            String[] rows = mainTextComponent.getText().split("\n");
-            String lastRow = rows[rows.length - 1];
-
-            lastRow = lastRow.replace(CARET_INDICATOR, "");
-
-            rows[rows.length - 1] = lastRow;
-
-            String newText = StringUtils.join(Arrays.asList(rows), "\n");
-
-            mainTextComponent.setText(newText + string);
-
-            return;
-        }
-
         mainTextComponent.setText(mainTextComponent.getText() + string);
+    }
+
+    public static void loglnToAuxiliaryTextComponent(@Nullable String input) {
+
+        logToAuxiliaryTextComponent((input == null ? "" : input) + "\n");
+    }
+
+    public static void clearAuxiliaryTextComponent() {
+
+        auxiliaryTextComponent.setText(null);
+    }
+
+    public static void logToAuxiliaryTextComponent(@Nullable String input) {
+
+        auxiliaryTextComponent.setText(auxiliaryTextComponent.getText() + input);
     }
 
     public static void logToInputField(@Nullable String input) {

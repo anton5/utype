@@ -1,7 +1,5 @@
 package com.utype.ui;
 
-import com.utype.Logger;
-
 import javax.swing.*;
 import javax.swing.text.DefaultCaret;
 import java.awt.*;
@@ -26,6 +24,10 @@ public class MainDialog extends JDialog {
         return inputTextField;
     }
 
+    public JPanel getAuxiliaryPanel() {
+        return auxiliaryPanel;
+    }
+
     public MainDialog() {
 
         setContentPane(contentPane);
@@ -38,9 +40,25 @@ public class MainDialog extends JDialog {
             }
         });
 
-        ((DefaultCaret) mainTextPane.getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        ((DefaultCaret) getMainTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        ((DefaultCaret) getAuxiliaryTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
         setPreferredSize(new Dimension(800, 600));
+
+        Dimension d = getAuxiliaryTextPane().getSize();
+
+        getAuxiliaryTextPane().setMaximumSize(d);
+        getAuxiliaryTextPane().setMinimumSize(d);
+        getAuxiliaryTextPane().setPreferredSize(d);
+
+        d = getMainTextPane().getSize();
+
+        getMainTextPane().setMaximumSize(d);
+        getMainTextPane().setMinimumSize(d);
+        getMainTextPane().setPreferredSize(d);
+
+        getAuxiliaryTextPane().setFocusable(false);
+        getMainTextPane().setFocusable(false);
         setFocusable(true);
     }
 

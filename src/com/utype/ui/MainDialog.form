@@ -16,21 +16,32 @@
           <gridbag weightx="1.0" weighty="1.0"/>
         </constraints>
         <properties>
-          <visible value="false"/>
+          <visible value="true"/>
         </properties>
         <border type="none"/>
         <children>
-          <component id="80a3c" class="javax.swing.JTextPane" binding="auxiliaryTextPane">
+          <scrollpane id="67a96">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="50"/>
-              </grid>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
               <gridbag weightx="1.0" weighty="1.0"/>
             </constraints>
             <properties>
-              <editable value="false"/>
+              <background color="-16777216"/>
+              <foreground color="-16777216"/>
             </properties>
-          </component>
+            <border type="none"/>
+            <children>
+              <component id="80a3c" class="javax.swing.JTextPane" binding="auxiliaryTextPane">
+                <constraints/>
+                <properties>
+                  <background color="-13619152"/>
+                  <editable value="false"/>
+                  <foreground color="-1"/>
+                  <selectedTextColor color="-1"/>
+                </properties>
+              </component>
+            </children>
+          </scrollpane>
         </children>
       </grid>
       <grid id="e3588" layout-manager="GridBagLayout">
@@ -57,6 +68,7 @@
                 <properties>
                   <background color="-13619152"/>
                   <editable value="false"/>
+                  <enabled value="true"/>
                   <foreground color="-1"/>
                   <text value=""/>
                 </properties>
