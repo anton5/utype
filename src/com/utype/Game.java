@@ -2,6 +2,7 @@ package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.locations.Location;
+import com.utype.locations.MatrixRoom;
 import com.utype.locations.PiPuzzleRoom;
 import com.utype.locations.CoordinatesPuzzle;
 
@@ -50,7 +51,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
         Location room1 = new PiPuzzleRoom("Room 1");
         Location room2 = new CoordinatesPuzzle("Room 2");
-        Location room3 = new Location("Room 3");
+        Location room3 = new MatrixRoom("Room 3");
         Location room4 = new Location("Room 4");
         Location hall = new Location("Main hall");
 

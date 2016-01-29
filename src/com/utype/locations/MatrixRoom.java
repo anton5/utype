@@ -3,7 +3,11 @@ package com.utype.locations;
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.Player;
+import com.utype.ui.UIManager;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +17,9 @@ import java.util.concurrent.TimeUnit;
  * Created by Roman Laitarenko on 1/27/16.
  */
 public class MatrixRoom extends Location implements Runnable {
+    static final int WIDTH = 85;        // Width of terminal window - 1
+    static final int FLIPS_PER_LINE = 5;    // No. of columns changed per line
+    static final int MILLISECONDS_OF_SLEEP = 200; // Delay between lines in millisecond
 
     private Thread thread;
 
@@ -22,6 +29,8 @@ public class MatrixRoom extends Location implements Runnable {
 
     @Override
     public void onPlayerEntered(Player player) {
+
+        UIManager.setIsAuxiliaryTextComponentVisible(true);
 
         thread = new Thread(this);
 
@@ -33,73 +42,91 @@ public class MatrixRoom extends Location implements Runnable {
         return true;
     }
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[1;31m";
-    public static final String ANSI_GREEN = "\u001B[1;32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
-    static final int width = 80;        // Width of terminal window - 1
-    static final int flipsPerLine = 5;    // No. of columns changed per line
-    static final int millisecondsOfSleep = 200; // Delay between lines in millisecond
-
     @Override
     public void run() {
 
         Random rand = new Random(System.nanoTime());
 
 
-        boolean[] switches = new boolean[width];
+        boolean[] switches = new boolean[WIDTH];
         for (int i = 0; i < switches.length; i++) {
             switches[i] = true;
         }
 
         String garbage = "1234567890/*-+.,./;[]\\=_~`!@#$%^&*()あたアカサザジズゼゾシスセソキクケコイウエオジャな";
-//        String garbage = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ";
-//        String garbage = "0123456789";
         String value = "CODE";
         int codeIndex = 0;
-//        final String garbage = "あたアカサザジズゼゾシスセソキクケコイウエオジャな";
+
+
+        LinkedList<String> linesQueue = new LinkedList<String>() {
+
+            @Override
+            public void addFirst(String s) {
+
+                if (size() >= 15) {
+                    removeLast();
+                }
+
+                super.addFirst(s);
+            }
+        };
 
         int glen = garbage.length();
         while (true) {        // Waiting for Ctrl-C
 
-            for (int i = 0; i != width; ++i) {
+            String line = "";
+
+            for (int i = 0; i != WIDTH; ++i) {
 
                 if (switches[i]) {
 
                     if (rand.nextInt(10000) > 9970 && codeIndex < value.length()) {
-                        Logger.log(Character.toString(value.charAt(codeIndex)));
+                        line += Character.toString(value.charAt(codeIndex));
                         codeIndex += 1;
                     } else {
-                        Logger.log(String.valueOf(garbage.charAt(rand.nextInt(glen))));
+
+                        line += String.valueOf(garbage.charAt(rand.nextInt(glen)));
                     }
 
                 } else {
 
-                    Logger.log(" ");
+                    line += " ";
                 }
             }
 
-            Logger.logln("");
+            linesQueue.addFirst("sfsdf sdfsd f sfd fs" + "@sdfsd@" + line + "@BBBBBF@");
 
-            for (int i = 0; i != flipsPerLine; ++i) {
+            Logger.clearAuxiliaryTextComponent();
+            Logger.logToAuxiliaryTextComponent(join(linesQueue, "\n"));
 
-                int x = rand.nextInt(width);
+            for (int i = 0; i != FLIPS_PER_LINE; ++i) {
+
+                int x = rand.nextInt(WIDTH);
 
                 switches[x] = !switches[x];
 
             }
             try {
-                TimeUnit.MILLISECONDS.sleep(millisecondsOfSleep);
+                TimeUnit.MILLISECONDS.sleep(MILLISECONDS_OF_SLEEP);
             } catch (InterruptedException ie) {
                 System.out.println("sleep interrupted");
             }
         }
+    }
+
+    static public String join(List<String> list, String conjunction)
+    {
+        StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (String item : list)
+        {
+            if (first)
+                first = false;
+            else
+                sb.append(conjunction);
+            sb.append(item);
+        }
+        return sb.toString();
     }
 
 }
