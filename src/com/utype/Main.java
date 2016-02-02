@@ -4,7 +4,6 @@ import com.utype.ui.MainDialog;
 import com.utype.ui.UIManager;
 
 public class Main {
-
     public static void main(String[] args) {
         InputManager inputManager = new InputManager();
         MainDialog dialog = new MainDialog();
