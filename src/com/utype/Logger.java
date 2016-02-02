@@ -4,10 +4,15 @@ import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
 
 import javax.swing.*;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Logger {
     private static final String CARET_INDICATOR = "> ";
+    private static final String COLOR_ESCAPE_STRING = "#@";
 
     private static JTextPane mainTextComponent;
     private static JTextComponent auxiliaryTextComponent;
@@ -21,9 +26,10 @@ public class Logger {
         Logger.inputTextComponent = inputTextComponent;
 
         logToInputField(CARET_INDICATOR);
+        ((AbstractDocument) auxiliaryTextComponent.getDocument()).setDocumentFilter(new CustomDocumentFilter());
     }
 
-    public static  void logln(@NonNull String  string) {
+    public static void logln(@NonNull String string) {
         log((string == null ? "" : string) + "\n");
     }
 
@@ -51,4 +57,138 @@ public class Logger {
 
         inputTextComponent.setText(input);
     }
+
+    public enum TextColor {
+        WHITE(Color.WHITE),
+        RED(Color.RED),
+        GREEN(Color.GREEN),
+        BLUE(Color.BLUE);
+
+        private Color color;
+
+        TextColor(Color color) {
+            this.color = color;
+        }
+
+        public Color getColor() {
+            return color;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("%s%d%s", COLOR_ESCAPE_STRING, color.hashCode(), COLOR_ESCAPE_STRING);
+        }
+
+        @Nullable
+        public static TextColor getColorFromString(String string) {
+
+            TextColor defaultColor = GREEN;
+            string = string.replaceAll(COLOR_ESCAPE_STRING, "");
+
+            int hash;
+
+            try {
+                hash = Integer.valueOf(string);
+            } catch (NumberFormatException e) {
+                return defaultColor;
+            }
+
+            TextColor[] colors = TextColor.values();
+
+            for (int i = 0; i < colors.length; i++) {
+
+                TextColor color = colors[i];
+
+                if (color.hashCode() == hash) {
+                    return color;
+                }
+            }
+
+            return defaultColor;
+        }
+    }
+
+    private final static class CustomDocumentFilter extends DocumentFilter {
+
+        private final StyledDocument styledDocument = ((JTextPane) auxiliaryTextComponent).getStyledDocument();
+
+        private HashMap<TextColor, AttributeSet> textColorAttributeSets = new HashMap<TextColor, AttributeSet>();
+        private final StyleContext styleContext = StyleContext.getDefaultStyleContext();
+
+        Pattern pattern = Pattern.compile(String.format("%s(.*?)%s", COLOR_ESCAPE_STRING, COLOR_ESCAPE_STRING));
+
+        {
+            TextColor[] colors = TextColor.values();
+
+            for (int i = 0; i < colors.length; i++) {
+
+                TextColor color = colors[i];
+
+                AttributeSet set = styleContext.addAttribute(styleContext.getEmptySet(),
+                        StyleConstants.Foreground,
+                        color.getColor());
+
+                textColorAttributeSets.put(color, set);
+            }
+        }
+
+        @Override
+        public void insertString(FilterBypass fb, int offset, String text, AttributeSet attributeSet) throws BadLocationException {
+            super.insertString(fb, offset, text, attributeSet);
+
+            updateTextStyles();
+        }
+
+        private void updateTextStyles() {
+            // Clear existing styles
+            styledDocument.setCharacterAttributes(0,
+                    auxiliaryTextComponent.getText().length(),
+                    textColorAttributeSets.get(TextColor.WHITE),
+                    false);
+
+            // Look for tokens and highlight them
+            Matcher matcher = pattern.matcher(auxiliaryTextComponent.getText());
+            boolean startFound = false;
+            int currentStart = 0;
+            TextColor currentColor = null;
+
+            while (matcher.find()) {
+
+                if (!startFound) {
+                    startFound = true;
+                    currentStart = matcher.start();
+                    currentColor = TextColor.getColorFromString(matcher.group());
+
+                    try {
+                        styledDocument.remove(matcher.start(), matcher.end() - matcher.start());
+                    } catch (BadLocationException e) {
+                        e.printStackTrace();
+                    }
+
+                    matcher = pattern.matcher(auxiliaryTextComponent.getText());
+
+                    continue;
+                }
+
+                startFound = false;
+                int currentEnd = matcher.start();
+
+                try {
+                    styledDocument.remove(matcher.start(), matcher.end() - matcher.start());
+                } catch (BadLocationException e) {
+                    e.printStackTrace();
+                }
+
+                if (currentColor != null) {
+
+                    AttributeSet set = textColorAttributeSets.get(currentColor);
+                    styledDocument.setCharacterAttributes(currentStart, currentEnd - currentStart, set, false);
+                }
+
+                matcher = pattern.matcher(auxiliaryTextComponent.getText());
+
+            }
+        }
+    }
+
 }
