@@ -7,13 +7,7 @@ import com.utype.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * U-type
- *
- * Created by Roman Laitarenko on 1/22/16.
- */
 public class Location {
-
     private Map<Direction, Location> locations = new HashMap<>();
 
     private String name;
@@ -41,7 +35,6 @@ public class Location {
     }
 
     public void setLocationInDirection(@NonNull Direction direction, @Nullable Location location) {
-
         locations.put(direction, location);
 
         if (location.getLocationInDirection(direction.opposite()) != this) {
@@ -54,7 +47,6 @@ public class Location {
     }
 
     public void onPlayerEntered(Player player) {
-
     }
 
     public enum Direction {
@@ -64,7 +56,6 @@ public class Location {
         EAST;
 
         public Direction opposite() {
-
             switch (this) {
                 case NORTH:
                     return SOUTH;

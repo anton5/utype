@@ -29,7 +29,6 @@ public class MainFrame extends JFrame {
     }
 
     public MainFrame() {
-
         setContentPane(contentPanel);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
@@ -45,13 +44,11 @@ public class MainFrame extends JFrame {
         setPreferredSize(new Dimension(800, 600));
 
         Dimension d = getAuxiliaryTextPane().getSize();
-
         getAuxiliaryTextPane().setMaximumSize(d);
         getAuxiliaryTextPane().setMinimumSize(d);
         getAuxiliaryTextPane().setPreferredSize(d);
 
         d = getMainTextPane().getSize();
-
         getMainTextPane().setMaximumSize(d);
         getMainTextPane().setMinimumSize(d);
         getMainTextPane().setPreferredSize(d);

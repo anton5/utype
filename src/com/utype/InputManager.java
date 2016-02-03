@@ -3,11 +3,6 @@ package com.utype;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 1/25/16.
- */
 public class InputManager implements KeyListener {
     private static final String CARET_INDICATOR = ">";
 
@@ -32,24 +27,20 @@ public class InputManager implements KeyListener {
     }
 
     public void start() {
-
         isRunning = true;
     }
 
     public void stop() {
-
         isRunning = false;
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-
         if (!isRunning) {
             return;
         }
 
         if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-
             String command = commandBuffer.toString().trim();
 
             notifyListenerWithString(command);
@@ -71,16 +62,13 @@ public class InputManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
 
     private void notifyListenerWithString(String command) {
-
         if (getListener() != null) {
             getListener().onReceiveUserInput(command);
         }

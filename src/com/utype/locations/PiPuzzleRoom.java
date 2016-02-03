@@ -5,11 +5,6 @@ import com.utype.Logger;
 import com.utype.Player;
 import com.utype.ui.UIManager;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 1/27/16.
- */
 public class PiPuzzleRoom extends Location {
     private static final int CLUE = 14159265;
     private static final int ANSWER = 35;
@@ -22,7 +17,6 @@ public class PiPuzzleRoom extends Location {
 
     @Override
     public void onPlayerEntered(Player player) {
-
         isFinished = false;
 
         UIManager.setIsAuxiliaryTextComponentVisible(true);
@@ -35,7 +29,6 @@ public class PiPuzzleRoom extends Location {
 
     @Override
     public boolean processInput(String input) {
-
         if (isFinished && !input.isEmpty()) {
             return false;
         }
@@ -63,7 +56,6 @@ public class PiPuzzleRoom extends Location {
     }
 
     public boolean check(int guess) {
-
         if (guess > 99 || guess < 10) {
             Logger.loglnToAuxiliaryTextComponent("Only enter TWO digits");
         }
@@ -73,7 +65,6 @@ public class PiPuzzleRoom extends Location {
         }
 
         if (guess == ANSWER) {
-
             Logger.loglnToAuxiliaryTextComponent("Yes! That's the number, 3 and 5 are the numbers that follow the sequence in Pi after the decimal");
             Logger.logToAuxiliaryTextComponent("Press 'Enter' to continue");
             //the door is opened

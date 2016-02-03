@@ -6,24 +6,22 @@ import com.utype.ui.UIManager;
 public class Main {
     public static void main(String[] args) {
         InputManager inputManager = new InputManager();
-        MainFrame dialog = new MainFrame();
+        MainFrame frame = new MainFrame();
         Player player = new Player("John Smith");
         Game game = new Game(player);
 
-        Logger.initialize(dialog.getMainTextPane(),
-                dialog.getAuxiliaryTextPane(),
-                dialog.getInputTextField());
-        UIManager.initialize(dialog);
+        Logger.initialize(frame.getMainTextPane(), frame.getAuxiliaryTextPane(), frame.getInputTextField());
+        UIManager.initialize(frame);
         UIManager.setIsAuxiliaryTextComponentVisible(false);
 
-        dialog.addKeyListener(inputManager);
+        frame.addKeyListener(inputManager);
         inputManager.setListener(game);
 
         inputManager.start();
         game.start();
 
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

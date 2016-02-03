@@ -3,13 +3,7 @@ package com.utype;
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.locations.Location;
 
-/**
- * U-type
- *
- * Created by Roman Laitarenko on 1/22/16.
- */
 public class Parser {
-
     public enum Command {
         SHOW_LOCATION
     }
