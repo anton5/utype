@@ -29,7 +29,7 @@ public class MatrixRoom extends Location implements Runnable {
     @Override
     public void onPlayerEntered(Player player) {
 
-        UIManager.setIsAuxiliaryVisible(true);
+        UIManager.setAuxiliaryVisible(true);
 
         thread = new Thread(this);
 

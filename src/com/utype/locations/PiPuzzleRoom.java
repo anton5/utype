@@ -19,7 +19,7 @@ public class PiPuzzleRoom extends Location {
     public void onPlayerEntered(Player player) {
         isFinished = false;
 
-        UIManager.setIsAuxiliaryVisible(true);
+        UIManager.setAuxiliaryVisible(true);
 
         Logger.loglnToAuxiliaryTextComponent(CLUE + "_ _");
         Logger.loglnToAuxiliaryTextComponent("YOU: Can you read this Ollie?");
@@ -36,7 +36,7 @@ public class PiPuzzleRoom extends Location {
         if (isFinished && input.isEmpty()) { // enter pressed
             Logger.clearAuxiliaryTextComponent();
             Logger.logln("You have successfully finished Pi puzzle");
-            UIManager.setIsAuxiliaryVisible(false);
+            UIManager.setAuxiliaryVisible(false);
             return true;
         }
 

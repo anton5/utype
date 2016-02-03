@@ -12,7 +12,7 @@ public class Main {
 
         Logger.initialize(frame.getMainTextPane(), frame.getAuxiliaryTextPane(), frame.getInputTextField());
         UIManager.initialize(frame);
-        UIManager.setIsAuxiliaryVisible(false);
+        UIManager.setAuxiliaryVisible(false);
 
         frame.addKeyListener(inputManager);
         inputManager.setListener(game);
