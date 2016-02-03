@@ -1,29 +1,23 @@
 package com.utype.ui;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 1/29/16.
- */
 public class UIManager {
-
     public static MainFrame dialog;
 
-    public static boolean isAuxiliaryTextComponentVisible;
+    public static boolean isAuxiliaryVisible;
 
     public static void initialize(MainFrame mainFrame) {
         dialog = mainFrame;
     }
 
-    public static boolean isAuxiliaryTextComponentVisible() {
-        return isAuxiliaryTextComponentVisible;
+    public static boolean isAuxiliaryVisible() {
+        return isAuxiliaryVisible;
     }
 
-    public static void setIsAuxiliaryTextComponentVisible(boolean isAuxiliaryTextComponentVisible) {
-        UIManager.isAuxiliaryTextComponentVisible = isAuxiliaryTextComponentVisible;
+    public static void setIsAuxiliaryVisible(boolean isAuxiliaryVisible) {
+        UIManager.isAuxiliaryVisible = isAuxiliaryVisible;
 
-        dialog.getAuxiliaryPanel().setVisible(isAuxiliaryTextComponentVisible);
-        dialog.getMainTextPane().setEnabled(!isAuxiliaryTextComponentVisible);
+        dialog.getAuxiliaryPanel().setVisible(isAuxiliaryVisible);
+        dialog.getMainTextPane().setEnabled(!isAuxiliaryVisible);
     }
 
 }

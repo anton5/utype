@@ -7,7 +7,6 @@ import com.utype.ui.UIManager;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -30,7 +29,7 @@ public class MatrixRoom extends Location implements Runnable {
     @Override
     public void onPlayerEntered(Player player) {
 
-        UIManager.setIsAuxiliaryTextComponentVisible(true);
+        UIManager.setIsAuxiliaryVisible(true);
 
         thread = new Thread(this);
 
