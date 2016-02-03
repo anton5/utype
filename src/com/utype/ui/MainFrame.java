@@ -29,6 +29,7 @@ public class MainFrame extends JFrame {
     }
 
     public MainFrame() {
+        setTitle("Utype");
         setContentPane(contentPanel);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
