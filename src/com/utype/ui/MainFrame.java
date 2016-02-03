@@ -5,7 +5,7 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainDialog extends JDialog {
+public class MainFrame extends JFrame {
     private JPanel contentPane;
     private JTextField inputTextField;
     private JTextPane mainTextPane;
@@ -28,10 +28,9 @@ public class MainDialog extends JDialog {
         return auxiliaryPanel;
     }
 
-    public MainDialog() {
+    public MainFrame() {
 
         setContentPane(contentPane);
-        setModal(true);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         addWindowListener(new WindowAdapter() {

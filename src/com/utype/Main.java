@@ -1,12 +1,12 @@
 package com.utype;
 
-import com.utype.ui.MainDialog;
+import com.utype.ui.MainFrame;
 import com.utype.ui.UIManager;
 
 public class Main {
     public static void main(String[] args) {
         InputManager inputManager = new InputManager();
-        MainDialog dialog = new MainDialog();
+        MainFrame dialog = new MainFrame();
         Player player = new Player("John Smith");
         Game game = new Game(player);
 

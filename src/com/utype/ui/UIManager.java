@@ -7,12 +7,12 @@ package com.utype.ui;
  */
 public class UIManager {
 
-    public static MainDialog dialog;
+    public static MainFrame dialog;
 
     public static boolean isAuxiliaryTextComponentVisible;
 
-    public static void initialize(MainDialog mainDialog) {
-        dialog = mainDialog;
+    public static void initialize(MainFrame mainFrame) {
+        dialog = mainFrame;
     }
 
     public static boolean isAuxiliaryTextComponentVisible() {
