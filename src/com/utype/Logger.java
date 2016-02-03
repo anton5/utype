@@ -58,6 +58,11 @@ public class Logger {
         inputTextComponent.setText(input);
     }
 
+    public static String wrapStringInColor(@NonNull String string, TextColor color) {
+
+        return color.toString() + string + color.toString();
+    }
+
     public enum TextColor {
         WHITE(Color.WHITE),
         RED(Color.RED),
@@ -76,13 +81,13 @@ public class Logger {
 
         @Override
         public String toString() {
-            return String.format("%s%d%s", COLOR_ESCAPE_STRING, color.hashCode(), COLOR_ESCAPE_STRING);
+            return String.format("%s%d%s", COLOR_ESCAPE_STRING, hashCode(), COLOR_ESCAPE_STRING);
         }
 
         @Nullable
         public static TextColor getColorFromString(String string) {
 
-            TextColor defaultColor = GREEN;
+            TextColor defaultColor = WHITE;
             string = string.replaceAll(COLOR_ESCAPE_STRING, "");
 
             int hash;
@@ -124,9 +129,13 @@ public class Logger {
 
                 TextColor color = colors[i];
 
+                Font font = new Font("monospaced", Font.PLAIN, 14);
+
                 AttributeSet set = styleContext.addAttribute(styleContext.getEmptySet(),
                         StyleConstants.Foreground,
                         color.getColor());
+                set = styleContext.addAttribute(set, StyleConstants.FontFamily, font.getFamily());
+                set = styleContext.addAttribute(set, StyleConstants.FontSize, font.getSize());
 
                 textColorAttributeSets.put(color, set);
             }

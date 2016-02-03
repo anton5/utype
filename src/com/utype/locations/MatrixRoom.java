@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Roman Laitarenko on 1/27/16.
  */
 public class MatrixRoom extends Location implements Runnable {
-    static final int WIDTH = 85;        // Width of terminal window - 1
+    static final int WIDTH = 70;        // Width of terminal window - 1
     static final int FLIPS_PER_LINE = 5;    // No. of columns changed per line
     static final int MILLISECONDS_OF_SLEEP = 200; // Delay between lines in millisecond
 
@@ -52,7 +52,7 @@ public class MatrixRoom extends Location implements Runnable {
             switches[i] = true;
         }
 
-        String garbage = "1234567890/*-+.,./;[]\\=_~`!@#$%^&*()あたアカサザジズゼゾシスセソキクケコイウエオジャな";
+        String garbage = "1234567890/*-+.,./;[]\\=_~`!$%^&*()あたアカサザジズゼゾシスセソキクケコイウエオジャな";
         String value = "CODE";
         int codeIndex = 0;
 
@@ -71,21 +71,21 @@ public class MatrixRoom extends Location implements Runnable {
         };
 
         int glen = garbage.length();
+
         while (true) {        // Waiting for Ctrl-C
 
             String line = "";
+            int codeCharIndex = -1;
 
             for (int i = 0; i != WIDTH; ++i) {
 
                 if (switches[i]) {
 
-                    if (rand.nextInt(10000) > 9970 && codeIndex < value.length()) {
-                        line += Character.toString(value.charAt(codeIndex));
-                        codeIndex += 1;
-                    } else {
-
-                        line += String.valueOf(garbage.charAt(rand.nextInt(glen)));
+                    if (rand.nextInt(10000) > 9970 && codeIndex < value.length() && codeCharIndex == -1) {
+                        codeCharIndex = i;
                     }
+
+                    line = line + String.valueOf(garbage.charAt(rand.nextInt(glen)));
 
                 } else {
 
@@ -93,7 +93,24 @@ public class MatrixRoom extends Location implements Runnable {
                 }
             }
 
-            linesQueue.addFirst("sfsdf sdfsd f sfd fs" + "@sdfsd@" + line + "@BBBBBF@");
+            if (codeCharIndex != -1) {
+
+                String firstPart = line.substring(0, codeCharIndex);
+                String lastPart = line.substring(codeCharIndex);
+
+                line = String.format("%s%s%s",
+                        Logger.wrapStringInColor(firstPart, Logger.TextColor.GREEN),
+                        Logger.wrapStringInColor(Character.toString(value.charAt(codeIndex)), Logger.TextColor.RED),
+                        Logger.wrapStringInColor(lastPart, Logger.TextColor.GREEN)
+                );
+
+                codeIndex += 1;
+
+            } else  {
+                line = Logger.wrapStringInColor(line, Logger.TextColor.GREEN);
+            }
+
+            linesQueue.addFirst(line);
 
             Logger.clearAuxiliaryTextComponent();
             Logger.logToAuxiliaryTextComponent(join(linesQueue, "\n"));
@@ -113,12 +130,10 @@ public class MatrixRoom extends Location implements Runnable {
         }
     }
 
-    static public String join(List<String> list, String conjunction)
-    {
+    static public String join(List<String> list, String conjunction) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
-        for (String item : list)
-        {
+        for (String item : list) {
             if (first)
                 first = false;
             else
