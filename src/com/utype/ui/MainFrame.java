@@ -6,11 +6,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainFrame extends JFrame {
-    private JPanel contentPane;
+    private JPanel contentPanel;
+    private JPanel auxiliaryPanel;
     private JTextField inputTextField;
     private JTextPane mainTextPane;
     private JTextPane auxiliaryTextPane;
-    private JPanel auxiliaryPanel;
 
     public JTextPane getMainTextPane() {
         return mainTextPane;
@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
 
-        setContentPane(contentPane);
+        setContentPane(contentPanel);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         addWindowListener(new WindowAdapter() {
