@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,12 +68,18 @@ public class Logger {
         WHITE(Color.WHITE),
         RED(Color.RED),
         GREEN(Color.GREEN),
-        BLUE(Color.BLUE);
+        BLUE(Color.BLUE),
+        BLACK(Color.BLACK);
 
         private Color color;
 
         TextColor(Color color) {
             this.color = color;
+        }
+
+        public static TextColor randomColor() {
+
+            return TextColor.values()[ (int )(Math.random() * TextColor.values().length)];
         }
 
         public Color getColor() {
@@ -152,7 +159,7 @@ public class Logger {
             // Clear existing styles
             styledDocument.setCharacterAttributes(0,
                     auxiliaryTextComponent.getText().length(),
-                    textColorAttributeSets.get(TextColor.WHITE),
+                    textColorAttributeSets.get(TextColor.BLACK),
                     false);
 
             // Look for tokens and highlight them

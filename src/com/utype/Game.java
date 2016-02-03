@@ -38,7 +38,7 @@ public class Game implements Runnable, InputManager.EventListener{
     public void run() {
         Location room1 = new PiPuzzleRoom("Room 1");
         Location room2 = new CoordinatesPuzzle("Room 2");
-        Location room3 = new MatrixRoom("Room 3");
+        Location room3 = new MatrixRoom("Matrix room");
         Location room4 = new Location("Room 4");
         Location hall = new Location("Main hall");
 
