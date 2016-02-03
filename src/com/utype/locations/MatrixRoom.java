@@ -196,7 +196,7 @@ public class MatrixRoom extends Location implements Runnable {
                 }
 
                 Logger.clearAuxiliaryTextComponent();
-                UIManager.setIsAuxiliaryTextComponentVisible(false);
+                UIManager.setAuxiliaryVisible(false);
                 Logger.logln("You've gained access to something");
             }
         });
