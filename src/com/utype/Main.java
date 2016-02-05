@@ -1,33 +1,27 @@
 package com.utype;
 
-import com.utype.ui.MainDialog;
+import com.utype.ui.MainFrame;
 import com.utype.ui.UIManager;
 
 public class Main {
-
-
     public static void main(String[] args) {
-
-
         InputManager inputManager = new InputManager();
-        MainDialog dialog = new MainDialog();
+        MainFrame frame = new MainFrame();
         Player player = new Player("John Smith");
         Game game = new Game(player);
 
-        Logger.initialize(dialog.getMainTextPane(),
-                dialog.getAuxiliaryTextPane(),
-                dialog.getInputTextField());
-        UIManager.initialize(dialog);
-        UIManager.setIsAuxiliaryTextComponentVisible(false);
+        Logger.initialize(frame.getMainTextPane(), frame.getAuxiliaryTextPane(), frame.getInputTextField());
+        UIManager.initialize(frame);
+        UIManager.setAuxiliaryVisible(false);
 
-        dialog.addKeyListener(inputManager);
+        frame.addKeyListener(inputManager);
         inputManager.setListener(game);
 
         inputManager.start();
         game.start();
 
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

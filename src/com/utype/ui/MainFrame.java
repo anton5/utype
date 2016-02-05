@@ -5,12 +5,12 @@ import javax.swing.text.DefaultCaret;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainDialog extends JDialog {
-    private JPanel contentPane;
+public class MainFrame extends JFrame {
+    private JPanel contentPanel;
+    private JPanel auxiliaryPanel;
     private JTextField inputTextField;
     private JTextPane mainTextPane;
     private JTextPane auxiliaryTextPane;
-    private JPanel auxiliaryPanel;
 
     public JTextPane getMainTextPane() {
         return mainTextPane;
@@ -28,10 +28,9 @@ public class MainDialog extends JDialog {
         return auxiliaryPanel;
     }
 
-    public MainDialog() {
-
-        setContentPane(contentPane);
-        setModal(true);
+    public MainFrame() {
+        setTitle("Utype");
+        setContentPane(contentPanel);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         addWindowListener(new WindowAdapter() {
@@ -46,13 +45,11 @@ public class MainDialog extends JDialog {
         setPreferredSize(new Dimension(800, 600));
 
         Dimension d = getAuxiliaryTextPane().getSize();
-
         getAuxiliaryTextPane().setMaximumSize(d);
         getAuxiliaryTextPane().setMinimumSize(d);
         getAuxiliaryTextPane().setPreferredSize(d);
 
         d = getMainTextPane().getSize();
-
         getMainTextPane().setMaximumSize(d);
         getMainTextPane().setMinimumSize(d);
         getMainTextPane().setPreferredSize(d);

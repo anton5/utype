@@ -1,15 +1,12 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
-import com.utype.locations.*;
+import com.utype.locations.Location;
+import com.utype.locations.MatrixRoom;
+import com.utype.locations.PiPuzzleRoom;
+import com.utype.locations.CoordinatesPuzzle;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 1/26/16.
- */
 public class Game implements Runnable, InputManager.EventListener{
-
     private Thread thread;
     private Player player;
 
@@ -18,7 +15,6 @@ public class Game implements Runnable, InputManager.EventListener{
     }
 
     public Thread getThread() {
-
         if (thread == null) {
             thread = new Thread(this);
         }
@@ -27,12 +23,10 @@ public class Game implements Runnable, InputManager.EventListener{
     }
 
     public void start() {
-
         getThread().start();
     }
 
     public void stop() {
-
         try {
             thread.join();
         } catch (InterruptedException e) {
@@ -40,15 +34,11 @@ public class Game implements Runnable, InputManager.EventListener{
         }
     }
 
-
     @Override
     public void run() {
-
-        // region Locations
-
-        Location room1 = new PuzzleEleven("Room 1");
+        Location room1 = new PiPuzzleRoom("Room 1");
         Location room2 = new CoordinatesPuzzle("Room 2");
-        Location room3 = new MatrixRoom("Room 3");
+        Location room3 = new MatrixRoom("Matrix room");
         Location room4 = new Location("Room 4");
         Location hall = new Location("Main hall");
 
@@ -58,8 +48,6 @@ public class Game implements Runnable, InputManager.EventListener{
         room3.setLocationInDirection(Location.Direction.SOUTH, room4);
         room4.setLocationInDirection(Location.Direction.WEST, hall);
 
-        // endregion
-
         player.setCurrentLocation(hall);
 
         Logger.logln("You start at main hall, type 'n w e s' to navigate, 'c' to show current location");
@@ -67,7 +55,6 @@ public class Game implements Runnable, InputManager.EventListener{
 
     @Override
     public void onReceiveUserInput(String input) {
-
         // give chance for the current location to process the input
         if (player.getCurrentLocation().processInput(input)) {
             return;
@@ -76,17 +63,14 @@ public class Game implements Runnable, InputManager.EventListener{
         Object output = Parser.parse(input);
 
         if (output == null) {
-
             Logger.logln("Cannot parse input!");
             return;
         }
 
         if (output instanceof Location.Direction) {
-
             Location.Direction direction = (Location.Direction) output;
 
             if (!player.move(direction)) {
-
                 Logger.logln("Cannot go there");
                 return;
             }
@@ -95,16 +79,13 @@ public class Game implements Runnable, InputManager.EventListener{
         }
 
         if (output instanceof Parser.Command) {
-
             Parser.Command command = (Parser.Command) output;
 
             switch (command) {
                 case SHOW_LOCATION:
                     Logger.logln("You are at " + player.getCurrentLocation().getName());
                     break;
-
             }
         }
-
     }
 }
