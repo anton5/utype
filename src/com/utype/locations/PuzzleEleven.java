@@ -24,6 +24,26 @@ public class PuzzleEleven extends Location {
         isFinished = false;
         UIManager.setAuxiliaryVisible(true);
 
+
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (String num : "1 2 3 4 5 6 7 8 9".split(" ")) {
+                    Logger.loglnToAuxiliaryTextComponent(num);
+//                    System.out.println(num);
+                    try {
+                        Thread.currentThread().sleep(500);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        t.start();
+
+
+/*
         printClue();
             Logger.logln("YOU: I get a sequence of numbers which then disappears.");
             Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
@@ -34,7 +54,7 @@ public class PuzzleEleven extends Location {
             //}
             Logger.logln("YOU: Let me try it again.");
             //Logger.logln("SYSTEM: Enter a number sequence:");
-
+*/
     }
 
     @Override
@@ -91,7 +111,7 @@ public class PuzzleEleven extends Location {
 
     public void printClue(){
         for (String num : numbers.split(" ")) {
-            Logger.loglnToAuxiliaryTextComponent("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            //Logger.loglnToAuxiliaryTextComponent("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             //System.out.println("SEQUENCE:");
             Logger.loglnToAuxiliaryTextComponent(num);
             try {

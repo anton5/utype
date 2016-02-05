@@ -1,10 +1,7 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
-import com.utype.locations.Location;
-import com.utype.locations.MatrixRoom;
-import com.utype.locations.PiPuzzleRoom;
-import com.utype.locations.CoordinatesPuzzle;
+import com.utype.locations.*;
 
 public class Game implements Runnable, InputManager.EventListener{
     private Thread thread;
@@ -36,7 +33,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
     @Override
     public void run() {
-        Location room1 = new PiPuzzleRoom("Room 1");
+        Location room1 = new PuzzleEleven("Room 1");
         Location room2 = new CoordinatesPuzzle("Room 2");
         Location room3 = new MatrixRoom("Matrix room");
         Location room4 = new Location("Room 4");
