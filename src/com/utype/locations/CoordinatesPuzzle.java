@@ -25,7 +25,7 @@ public class CoordinatesPuzzle extends Location {
 
         Logger.logln("YOU: Ok, I need to enter the coordinates to proceed to the rendezvous point");
         Logger.logln("YOU: Ollie, can you help me out a little?");
-        Logger.logln("CM: Yeah, you gotta enter 'x' in order to achieve 'y=20'. According to my calculations the number is somewhere in the range of 35 to 50");
+        Logger.logln("CM: Yeah, you gotta enter 'x' in order to achieve 'y=20'. According to my calculations the number is somewhere in the range of 30 to 50");
         Logger.logln("SYSTEM: Enter x:");
     }
 
@@ -52,8 +52,8 @@ public class CoordinatesPuzzle extends Location {
 
     public boolean check(int guess) {
 
-        if (guess > 50 || guess < 35) {
-            Logger.logln("Only enter a number in the range of 35 to 50");
+        if (guess > 50 || guess < 30) {
+            Logger.logln("Only enter a number in the range of 30 to 50");
         }
 
         if (guess != ANSWER) {
@@ -81,7 +81,7 @@ public class CoordinatesPuzzle extends Location {
     }
 
 }
-        /*double exp = (Math.pow((-(guess-42)), 2))/2;
+        /*double exp = -(Math.pow((guess-42), 2))/2;
         return (Math.pow(1.5,exp))/0.05;*/
 
         //(1.5^((-(x-42)^2)/2))/0.05
