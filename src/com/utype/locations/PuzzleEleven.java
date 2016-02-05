@@ -22,7 +22,7 @@ public class PuzzleEleven extends Location {
     @Override
     public void onPlayerEntered(Player player) {
         isFinished = false;
-        UIManager.setIsAuxiliaryTextComponentVisible(true);
+        UIManager.setAuxiliaryVisible(true);
 
         printClue();
             Logger.logln("YOU: I get a sequence of numbers which then disappears.");
@@ -48,7 +48,7 @@ public class PuzzleEleven extends Location {
 
             Logger.clearAuxiliaryTextComponent();
             Logger.logln("You have successfully finished eleven puzzle");
-            UIManager.setIsAuxiliaryTextComponentVisible(false);
+            UIManager.setAuxiliaryVisible(false);
             return true;
         }
 
