@@ -2,6 +2,7 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
+import com.utype.characters.Character;
 import com.utype.characters.Player;
 import com.utype.ui.UIManager;
 
@@ -25,7 +26,8 @@ public class MatrixRoom extends Location implements Runnable {
     }
 
     @Override
-    public void onPlayerEntered(Player player) {
+    public void onCharacterDidEnter(Character character) {
+
         UIManager.setAuxiliaryVisible(true);
 
         restartGame();
@@ -222,7 +224,7 @@ public class MatrixRoom extends Location implements Runnable {
 
                 line = String.format("%s%s%s",
                         Logger.wrapStringInColor(firstPart, Logger.TextColor.GREEN),
-                        Logger.wrapStringInColor(Character.toString(CODE.charAt(codeIndex)), Logger.TextColor.BLACK),
+                        Logger.wrapStringInColor(java.lang.Character.toString(CODE.charAt(codeIndex)), Logger.TextColor.BLACK),
                         Logger.wrapStringInColor(lastPart, Logger.TextColor.GREEN)
                 );
                 codeIndex += 1;
