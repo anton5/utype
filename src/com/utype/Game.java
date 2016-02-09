@@ -1,6 +1,7 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.characters.Player;
 import com.utype.locations.*;
 
 public class Game implements Runnable, InputManager.EventListener{

@@ -1,6 +1,8 @@
-package com.utype;
+package com.utype.characters;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.sun.webpane.platform.ThemeClient;
+import com.utype.Loot;
 import com.utype.locations.Location;
 
 import java.util.HashMap;
@@ -10,28 +12,17 @@ import java.util.HashMap;
  *
  * Created by Roman Laitarenko on 1/22/16.
  */
-public class Player {
+public class Player extends Character {
 
-    private Location currentLocation;
-    private String name;
     private HashMap<String, Loot> loot;
 
-    public Player(@NonNull String name) {
-        this.name = name;
+    public Player(@NonNull String name, int health) {
+        super(name, health);
     }
 
-    @NonNull
-    public String getName() {
-        return name;
-    }
-
-    @NonNull
-    public Location getCurrentLocation() {
-        return currentLocation;
-    }
-
-    public void setCurrentLocation(@NonNull Location currentLocation) {
-        this.currentLocation = currentLocation;
+    @Override
+    public int getBaseDamage() {
+        return PLAYER_BASE_DAMAGE;
     }
 
     public boolean move(@NonNull Location.Direction direction) {
@@ -43,7 +34,6 @@ public class Player {
         }
 
         setCurrentLocation(destination);
-        destination.onPlayerEntered(this);
 
         return true;
     }

@@ -2,7 +2,7 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.Player;
+import com.utype.characters.Player;
 
 /**
  * Created by Sakis on 29/01/2016.
