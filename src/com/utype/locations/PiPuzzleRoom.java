@@ -2,7 +2,8 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.Player;
+import com.utype.characters.Character;
+import com.utype.characters.Player;
 import com.utype.ui.UIManager;
 
 public class PiPuzzleRoom extends Location {
@@ -16,7 +17,8 @@ public class PiPuzzleRoom extends Location {
     }
 
     @Override
-    public void onPlayerEntered(Player player) {
+    public void onCharacterDidEnter(Character character) {
+
         isFinished = false;
 
         UIManager.setAuxiliaryVisible(true);

@@ -2,7 +2,8 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.Player;
+import com.utype.characters.Character;
+import com.utype.characters.Player;
 
 /**
  * Created by Sakis on 29/01/2016.
@@ -19,7 +20,7 @@ public class CoordinatesPuzzle extends Location {
     }
 
     @Override
-    public void onPlayerEntered(Player player) {
+    public void onCharacterDidEnter(Character character) {
 
         isFinished = false;
 
@@ -73,10 +74,10 @@ public class CoordinatesPuzzle extends Location {
     }
 
 
-    public double calc(int guess){
+    public double calc(int guess) {
 
-        double exp = (Math.pow((-(guess-42)), 2))/2;
-        return (Math.pow(1.5,exp))/0.05;
+        double exp = (Math.pow((-(guess - 42)), 2)) / 2;
+        return (Math.pow(1.5, exp)) / 0.05;
 
     }
 
@@ -84,6 +85,6 @@ public class CoordinatesPuzzle extends Location {
         /*double exp = -(Math.pow((guess-42), 2))/2;
         return (Math.pow(1.5,exp))/0.05;*/
 
-        //(1.5^((-(x-42)^2)/2))/0.05
+//(1.5^((-(x-42)^2)/2))/0.05
 
 

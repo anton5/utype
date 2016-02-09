@@ -1,6 +1,7 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.characters.Player;
 import com.utype.locations.*;
 
 public class Game implements Runnable, InputManager.EventListener{
@@ -33,7 +34,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
     @Override
     public void run() {
-        Location room1 = new PuzzleEleven("Room 1");
+        Location room1 = new PiPuzzleRoom("Room 1");
         Location room2 = new CoordinatesPuzzle("Room 2");
         Location room3 = new MatrixRoom("Matrix room");
         Location room4 = new Location("Room 4");
@@ -47,7 +48,7 @@ public class Game implements Runnable, InputManager.EventListener{
 
         player.setCurrentLocation(hall);
 
-        Logger.logln("You start at main hall, type 'n w e s' to navigate, 'c' to show current location");
+        Logger.logln("You start at the Main hall, type 'n' 'w' 'e' or 's' to navigate, 'c' to show current location.");
     }
 
     @Override

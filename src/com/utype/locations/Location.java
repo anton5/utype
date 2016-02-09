@@ -2,12 +2,14 @@ package com.utype.locations;
 
 import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
-import com.utype.Player;
+import com.utype.characters.Character;
+import com.utype.characters.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Location {
+public class Location implements Character.EventListener {
+
     private Map<Direction, Location> locations = new HashMap<>();
 
     private String name;
@@ -46,7 +48,24 @@ public class Location {
         return false;
     }
 
-    public void onPlayerEntered(Player player) {
+    @Override
+    public void onCharacterDidEnter(Character character) {
+
+    }
+
+    @Override
+    public void onCharacterDidEnterBattle(Character character, Character enemy) {
+
+    }
+
+    @Override
+    public void onCharacterDidExitBattle(Character character, Character enemy) {
+
+    }
+
+    @Override
+    public void onCharacterDidDie(Character character) {
+
     }
 
     public enum Direction {
