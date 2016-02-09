@@ -22,7 +22,7 @@ public class MatrixRoom extends Location implements Runnable {
     private Thread messageThread;
 
     public MatrixRoom(@NonNull String name) {
-        super(name, null, null, null, null);
+        super(name);
     }
 
     @Override

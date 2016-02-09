@@ -14,7 +14,7 @@ public class PuzzleEleven extends Location {
     private boolean isFinished;
 
     public PuzzleEleven(@NonNull String name) {
-        super(name, null, null, null, null);
+        super(name);
     }
 
     @Override

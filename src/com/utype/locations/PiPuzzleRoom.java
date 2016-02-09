@@ -13,7 +13,7 @@ public class PiPuzzleRoom extends Location {
     private boolean isFinished;
 
     public PiPuzzleRoom(@NonNull String name) {
-        super(name, null, null, null, null);
+        super(name);
     }
 
     @Override

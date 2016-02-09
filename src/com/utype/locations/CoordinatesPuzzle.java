@@ -16,7 +16,7 @@ public class CoordinatesPuzzle extends Location {
     private boolean isFinished;
 
     public CoordinatesPuzzle(@NonNull String name) {
-        super(name, null, null, null, null);
+        super(name);
     }
 
     @Override

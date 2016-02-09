@@ -3,6 +3,7 @@ package com.utype.locations;
 import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.characters.Character;
+import com.utype.characters.Monster;
 import com.utype.characters.Player;
 
 import java.util.HashMap;
@@ -11,15 +12,31 @@ import java.util.Map;
 public class Location implements Character.EventListener {
 
     private Map<Direction, Location> locations = new HashMap<>();
+    private Monster monster;
 
     private String name;
 
     public Location(@NonNull String name) {
-        this(name, null, null, null, null);
+        this(name, null);
+    }
+
+    public Location(@NonNull String name, @Nullable Monster monster) {
+        this(name, monster, null, null, null, null);
     }
 
     public Location(@NonNull String name, Location north, Location west, Location south, Location east) {
+        this(name, null, north, west, south, east);
+    }
+
+    public Location(@NonNull String name,
+                    @Nullable Monster monster,
+                    Location north,
+                    Location west,
+                    Location south,
+                    Location east) {
+
         this.name = name;
+        this.monster = monster;
 
         locations.put(Direction.NORTH, north);
         locations.put(Direction.WEST, west);
