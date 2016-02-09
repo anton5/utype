@@ -15,7 +15,7 @@ public class PuzzleEleven extends Location {
 
     private boolean isFinished;
 
-    public PuzzleEleven(@NonNull String name){
+    public PuzzleEleven(@NonNull String name) {
         super(name, null, null, null, null);
     }
 
@@ -25,36 +25,16 @@ public class PuzzleEleven extends Location {
         UIManager.setAuxiliaryVisible(true);
 
 
-
-        /*Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (String num : "1 2 3 4 5 6 7 8 9".split(" ")) {
-                    Logger.loglnToAuxiliaryTextComponent(num);
-//                    System.out.println(num);
-                    try {
-                        Thread.currentThread().sleep(500);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        t.start();*/
-
-
-/*
         printClue();
-            Logger.logln("YOU: I get a sequence of numbers which then disappears.");
-            Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
-            Logger.logln("YOU: There are many artifacts in here which appear to be in sets.");
-            //if(player has found the clues then enter this line:){
-            Logger.logln("YOU: All are in sets of eleven");
-            Logger.logln("CM: I would guess then that eleven is the key. But how?");
-            //}
-            Logger.logln("YOU: Let me try it again.");
-            //Logger.logln("SYSTEM: Enter a number sequence:");
-*/
+        Logger.logln("YOU: I get a sequence of numbers which then disappears.");
+        Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
+        Logger.logln("YOU: There are many artifacts in here which appear to be in sets.");
+        //if(player has found the clues then enter this line:){
+        Logger.logln("YOU: All are in sets of eleven");
+        Logger.logln("CM: I would guess then that eleven is the key. But how?");
+        //}
+        Logger.logln("YOU: Let me try it again.");
+
     }
 
     @Override
@@ -89,51 +69,46 @@ public class PuzzleEleven extends Location {
     public boolean check(int guess) {
 
 
-        printClue();
+        //printClue();
 
 
-                if (guess != ANSWER) {
-                    Logger.logln("YOU: That doesn't seem to be the correct sequence, I'll try again.");
-                    printClue();
+        if (guess != ANSWER) {
+            Logger.logln("YOU: That doesn't seem to be the correct sequence, I'll try again.");
+            printClue();
 
-                }
+        }
 
-                if (guess == ANSWER) {
+        if (guess == ANSWER) {
 
-                    Logger.loglnToAuxiliaryTextComponent("YOU: OK! I got it, every number on the sequence shown plus every number in the entered sequence should add up to 11");
-                    Logger.logToAuxiliaryTextComponent("Press 'Enter' to continue");
-                    //the door is opened
-                    return true;
-                }
+            Logger.loglnToAuxiliaryTextComponent("YOU: OK! I got it, every number on the sequence shown plus every number in the entered sequence should add up to 11");
+            Logger.logToAuxiliaryTextComponent("Press 'Enter' to continue");
+            //the door is opened
+            return true;
+        }
 
-                return false;
-            }
+        return false;
+    }
 
-    public void printClue(){
+    public void printClue() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println("\n");
                 for (String num : numbers.split(" ")) {
                     Logger.loglnToAuxiliaryTextComponent("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    //System.out.println("SEQUENCE:");
                     Logger.loglnToAuxiliaryTextComponent(num);
                     try {
                         Thread.currentThread().sleep(500);
-                        //TimeUnit.MILLISECONDS.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
 
                 }
+
+                Logger.loglnToAuxiliaryTextComponent("SYSTEM: Enter sequence:");
             }
         });
         t.start();
 
 
-        Logger.loglnToAuxiliaryTextComponent("SYSTEM: Enter sequence:");
-
-
     }
-
-    }
+}
