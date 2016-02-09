@@ -27,13 +27,13 @@ public class Player extends Character {
 
     public boolean move(@NonNull Location.Direction direction) {
 
-        boolean result = super.move(direction);
+        Location destination = getCurrentLocation().getLocationInDirection(direction);
 
-        if (!result) {
+        if (destination == null) {
             return false;
         }
 
-        getCurrentLocation().onPlayerEntered(this);
+        setCurrentLocation(destination);
 
         return true;
     }

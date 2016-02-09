@@ -51,16 +51,5 @@ public abstract class Character {
         this.skill += 1;
     }
 
-    public boolean move(@NonNull Location.Direction direction) {
-
-        Location destination = getCurrentLocation().getLocationInDirection(direction);
-
-        if (destination == null) {
-            return false;
-        }
-
-        setCurrentLocation(destination);
-
-        return true;
-    }
+    public abstract boolean move(@NonNull Location.Direction direction);
 }
