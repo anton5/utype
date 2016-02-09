@@ -2,11 +2,8 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.Player;
-import com.utype.locations.Location;
+import com.utype.characters.Player;
 import com.utype.ui.UIManager;
-
-import java.util.concurrent.TimeUnit;
 
 public class PuzzleEleven extends Location {
 
