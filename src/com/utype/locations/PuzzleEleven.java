@@ -18,12 +18,19 @@ public class PuzzleEleven extends Location {
     }
 
     @Override
-    public void onCharacterDidEnter(Character character) {
-        isFinished = false;
+    protected void startPuzzleIfNeeded() {
+        super.startPuzzleIfNeeded();
+
+        if (isFinished) {
+            return;
+        }
+
+        captureInput();
+
         UIManager.setAuxiliaryVisible(true);
 
-
         printClue();
+
         Logger.logln("YOU: I get a sequence of numbers which then disappears.");
         Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
         Logger.logln("YOU: There are many artifacts in here which appear to be in sets.");
@@ -32,11 +39,14 @@ public class PuzzleEleven extends Location {
         Logger.logln("CM: I would guess then that eleven is the key. But how?");
         //}
         Logger.logln("YOU: Let me try it again.");
-
     }
 
     @Override
     public boolean processInput(String input) {
+
+        if (super.processInput(input)) {
+            return true;
+        }
 
         if (isFinished && !input.isEmpty()) {
             return false;
@@ -47,6 +57,8 @@ public class PuzzleEleven extends Location {
             Logger.clearAuxiliaryTextComponent();
             Logger.logln("You have successfully finished eleven puzzle");
             UIManager.setAuxiliaryVisible(false);
+
+            releaseInput();
             return true;
         }
 

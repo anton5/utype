@@ -1,7 +1,7 @@
 package com.utype.characters;
 
 import com.sun.javafx.beans.annotations.NonNull;
-import com.sun.webpane.platform.ThemeClient;
+import com.utype.Logger;
 import com.utype.Loot;
 import com.utype.locations.Location;
 
@@ -14,6 +14,7 @@ import java.util.HashMap;
  */
 public class Player extends Character {
 
+    private boolean dodgedCurrentMonster;
     private HashMap<String, Loot> loot;
 
     public Player(@NonNull String name, int health) {
@@ -23,6 +24,28 @@ public class Player extends Character {
     @Override
     public int getBaseDamage() {
         return PLAYER_BASE_DAMAGE;
+    }
+
+    public boolean dodgedCurrentMonster() {
+        return dodgedCurrentMonster;
+    }
+
+    public void setDodgedCurrentMonster(boolean dodgedCurrentMonster) {
+        this.dodgedCurrentMonster = dodgedCurrentMonster;
+    }
+
+    @Override
+    public void setCurrentLocation(@NonNull Location currentLocation) {
+        super.setCurrentLocation(currentLocation);
+
+        setDodgedCurrentMonster(false);
+    }
+
+    @Override
+    public void die() {
+        super.die();
+
+        Logger.logln("You took a wrong turn and died. Game over.");
     }
 
     public boolean move(@NonNull Location.Direction direction) {

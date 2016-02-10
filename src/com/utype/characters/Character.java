@@ -38,6 +38,15 @@ public abstract class Character {
     }
 
     public void setCurrentLocation(@NonNull Location currentLocation) {
+
+        if (this.currentLocation == currentLocation) {
+            return;
+        }
+
+        if (this.currentLocation != null) {
+            notifyListenerWithExitLocation();
+        }
+
         this.currentLocation = currentLocation;
 
         setListener(currentLocation);
@@ -59,8 +68,18 @@ public abstract class Character {
         return skill;
     }
 
-    public void increaceSkill() {
+    public void increaseSkill() {
         this.skill += 1;
+    }
+
+    public boolean isDead() {
+        return health <= 0;
+    }
+
+    public void die() {
+        health = 0;
+
+        notifyListenerWithDeath();
     }
 
     public abstract boolean move(@NonNull Location.Direction direction);
@@ -68,6 +87,12 @@ public abstract class Character {
     private void notifyListenerWithEnteredLocation() {
         if (getListener() != null) {
             getListener().onCharacterDidEnter(this);
+        }
+    }
+
+    private void notifyListenerWithExitLocation() {
+        if (getListener() != null) {
+            getListener().onCharacterDidExit(this);
         }
     }
 
@@ -91,6 +116,8 @@ public abstract class Character {
 
     public interface EventListener {
         void onCharacterDidEnter(Character character);
+
+        void onCharacterDidExit(Character character);
 
         void onCharacterDidEnterBattle(Character character, Character enemy);
 

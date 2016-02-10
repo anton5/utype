@@ -17,11 +17,15 @@ public class PiPuzzleRoom extends Location {
     }
 
     @Override
-    public void onCharacterDidEnter(Character character) {
+    protected void startPuzzleIfNeeded() {
 
-        isFinished = false;
+        if (isFinished) {
+            return;
+        }
 
         UIManager.setAuxiliaryVisible(true);
+
+        captureInput();
 
         Logger.loglnToAuxiliaryTextComponent(CLUE + "_ _");
         Logger.loglnToAuxiliaryTextComponent("YOU: Can you read this Ollie?");

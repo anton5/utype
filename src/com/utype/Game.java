@@ -4,7 +4,7 @@ import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.characters.Player;
 import com.utype.locations.*;
 
-public class Game implements Runnable, InputManager.EventListener{
+public class Game implements Runnable, InputManager.EventListener {
     private Thread thread;
     private Player player;
 
@@ -46,44 +46,58 @@ public class Game implements Runnable, InputManager.EventListener{
         room3.setLocationInDirection(Location.Direction.SOUTH, room4);
         room4.setLocationInDirection(Location.Direction.WEST, hall);
 
-        player.setCurrentLocation(hall);
-
         Logger.logln("You start at the Main hall, type 'n' 'w' 'e' or 's' to navigate, 'c' to show current location.");
+
+        player.setCurrentLocation(hall);
     }
 
     @Override
     public void onReceiveUserInput(String input) {
-        // give chance for the current location to process the input
-        if (player.getCurrentLocation().processInput(input)) {
+
+        if (player.isDead()) {
+
+            Logger.logln("Game over, dude!");
+
             return;
         }
 
-        Object output = Parser.parse(input);
+        // give chance for the current location to process the input
+        if (player.getCurrentLocation().holdsInput()) {
 
-        if (output == null) {
+            player.getCurrentLocation().processInput(input);
+            return;
+        }
+
+        Parser.Command command = Parser.parse(input);
+
+        if (command == null) {
             Logger.logln("Cannot parse input!");
             return;
         }
 
-        if (output instanceof Location.Direction) {
-            Location.Direction direction = (Location.Direction) output;
+        if (Parser.Command.DIRECTIONS.contains(command)) {
+            Location.Direction direction = Location.Direction.directionFromCommand(command);
 
             if (!player.move(direction)) {
+
                 Logger.logln("Cannot go there");
+
+                if (player.dodgedCurrentMonster()) {
+                    player.die();
+                }
+
                 return;
             }
 
             Logger.logln(player.getName() + " now in " + player.getCurrentLocation().getName());
+            return;
         }
 
-        if (output instanceof Parser.Command) {
-            Parser.Command command = (Parser.Command) output;
-
-            switch (command) {
-                case SHOW_LOCATION:
-                    Logger.logln("You are at " + player.getCurrentLocation().getName());
-                    break;
-            }
+        switch (command) {
+            case SHOW_LOCATION:
+                Logger.logln("You are at " + player.getCurrentLocation().getName());
+                break;
         }
+
     }
 }

@@ -4,6 +4,8 @@ import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.locations.Location;
 
+import java.util.UUID;
+
 /**
  * U-type
  * <p/>
@@ -13,6 +15,10 @@ public class Monster extends Character {
 
     public Monster(@NonNull String name, int health) {
         super(name, health);
+    }
+
+    public static Monster getRandomMonster() {
+        return new Monster(UUID.randomUUID().toString(), 1000);
     }
 
     @Override

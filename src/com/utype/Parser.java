@@ -1,33 +1,50 @@
 package com.utype;
 
 import com.sun.javafx.beans.annotations.NonNull;
-import com.utype.locations.Location;
+
+import java.util.EnumSet;
 
 public class Parser {
+
     public enum Command {
-        SHOW_LOCATION
+
+        // navigation
+        GO_NORTH("n"),
+        GO_WEST("w"),
+        GO_SOUTH("s"),
+        GO_EAST("e"),
+
+        // pre-battle
+        FIGHT("f"),
+        DODGE("d"),
+
+        // other
+        SHOW_LOCATION("c");
+
+        public static final EnumSet DIRECTIONS = EnumSet.of(GO_NORTH, GO_WEST, GO_SOUTH, GO_EAST);
+
+        private String commandString;
+
+        Command(@NonNull String commandString) {
+            this.commandString = commandString;
+        }
+
+        @Override
+        public String toString() {
+            return commandString;
+        }
     }
 
-    public static Object parse(@NonNull String string) {
+    public static Command parse(@NonNull String string) {
 
-        if (string.equals("n")) {
-            return Location.Direction.NORTH;
-        }
 
-        if (string.equals("w")) {
-            return Location.Direction.WEST;
-        }
+        for (int i = 0; i < Command.values().length; i++) {
 
-        if (string.equals("s")) {
-            return Location.Direction.SOUTH;
-        }
+            Command command = Command.values()[i];
 
-        if (string.equals("e")) {
-            return Location.Direction.EAST;
-        }
-
-        if (string.equals("c")) {
-            return Command.SHOW_LOCATION;
+            if (string.equals(command.toString())) {
+                return command;
+            }
         }
 
         return null;

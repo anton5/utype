@@ -2,6 +2,9 @@ package com.utype.locations;
 
 import com.sun.istack.internal.Nullable;
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.Logger;
+import com.utype.Parser;
+import com.utype.battle.Battle;
 import com.utype.characters.Character;
 import com.utype.characters.Monster;
 import com.utype.characters.Player;
@@ -13,30 +16,23 @@ public class Location implements Character.EventListener {
 
     private Map<Direction, Location> locations = new HashMap<>();
     private Monster monster;
+    private Player currentPlayer;
+    private Battle battle;
 
     private String name;
+    private boolean isHoldingInput;
 
     public Location(@NonNull String name) {
-        this(name, null);
-    }
-
-    public Location(@NonNull String name, @Nullable Monster monster) {
-        this(name, monster, null, null, null, null);
-    }
-
-    public Location(@NonNull String name, Location north, Location west, Location south, Location east) {
-        this(name, null, north, west, south, east);
+        this(name, null, null, null, null);
     }
 
     public Location(@NonNull String name,
-                    @Nullable Monster monster,
                     Location north,
                     Location west,
                     Location south,
                     Location east) {
 
         this.name = name;
-        this.monster = monster;
 
         locations.put(Direction.NORTH, north);
         locations.put(Direction.WEST, west);
@@ -62,12 +58,101 @@ public class Location implements Character.EventListener {
     }
 
     public boolean processInput(String input) {
+
+
+        if (battle != null && battle.isGoing()) {
+
+            battle.processInput(input);
+
+            return true;
+        }
+
+        Parser.Command command = Parser.parse(input);
+
+
+        if (command == Parser.Command.DODGE) {
+
+            currentPlayer.setDodgedCurrentMonster(true);
+
+            Logger.logln("You have decided to dodge " + monster.getName());
+
+            releaseInput();
+
+            startPuzzleIfNeeded();
+
+            return true;
+        }
+
+        if (command == Parser.Command.FIGHT) {
+
+            startBattle();
+
+            return true;
+        }
+
         return false;
+    }
+
+    private void startBattle() {
+
+        battle = new Battle(currentPlayer, monster);
+
+        battle.start();
+    }
+
+    protected void startPuzzleIfNeeded() {
+
+    }
+
+    public boolean holdsInput() {
+        return isHoldingInput;
+    }
+
+    protected void captureInput() {
+        isHoldingInput = true;
+    }
+
+    protected void releaseInput() {
+        isHoldingInput = false;
+    }
+
+    private void rollTheMonster() {
+
+        if (monster != null) {
+            return;
+        }
+
+        if (Math.random() > 0.7) {
+
+            monster = Monster.getRandomMonster();
+            return;
+        }
+
+        startPuzzleIfNeeded();
     }
 
     @Override
     public void onCharacterDidEnter(Character character) {
 
+        currentPlayer = (Player) character;
+
+        Logger.logln("You have entered " + getName() + ".");
+
+        rollTheMonster();
+
+        if (monster != null && !monster.isDead()) {
+
+            Logger.logln("There is " + monster.getName() + " right ahead of you");
+            Logger.logln("Do you want to fight(f) or dodge(d)?");
+
+            captureInput();
+        }
+    }
+
+    @Override
+    public void onCharacterDidExit(Character character) {
+
+        currentPlayer = null;
     }
 
     @Override
@@ -101,6 +186,22 @@ public class Location implements Character.EventListener {
                     return NORTH;
                 case EAST:
                     return WEST;
+            }
+
+            return null;
+        }
+
+        public static Direction directionFromCommand(Parser.Command command) {
+
+            switch (command) {
+                case GO_NORTH:
+                    return NORTH;
+                case GO_WEST:
+                    return WEST;
+                case GO_SOUTH:
+                    return SOUTH;
+                case GO_EAST:
+                    return EAST;
             }
 
             return null;
