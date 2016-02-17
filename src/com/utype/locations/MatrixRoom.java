@@ -35,6 +35,11 @@ public class MatrixRoom extends Location implements Runnable {
 
     @Override
     public boolean processInput(String input) {
+
+        if (super.processInput(input)) {
+            return true;
+        }
+
         if (!isRunning) {
             return false;
         }
@@ -43,6 +48,7 @@ public class MatrixRoom extends Location implements Runnable {
             try {
                 isRunning = false;
                 thread.join();
+                releaseInput();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -52,6 +58,7 @@ public class MatrixRoom extends Location implements Runnable {
             try {
                 isRunning = false;
                 thread.join();
+                releaseInput();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -65,6 +72,8 @@ public class MatrixRoom extends Location implements Runnable {
 
         isRunning = true;
         thread.start();
+
+        captureInput();
     }
 
     private void showDeniedMessage() {

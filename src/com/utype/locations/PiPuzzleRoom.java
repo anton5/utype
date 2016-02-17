@@ -35,6 +35,11 @@ public class PiPuzzleRoom extends Location {
 
     @Override
     public boolean processInput(String input) {
+
+        if (super.processInput(input)) {
+            return true;
+        }
+
         if (isFinished && !input.isEmpty()) {
             return false;
         }
@@ -43,6 +48,8 @@ public class PiPuzzleRoom extends Location {
             Logger.clearAuxiliaryTextComponent();
             Logger.logln("You have successfully finished Pi puzzle");
             UIManager.setAuxiliaryVisible(false);
+            releaseInput();
+
             return true;
         }
 
@@ -56,6 +63,7 @@ public class PiPuzzleRoom extends Location {
         }
 
         isFinished = check(guess);
+
 
         return true;
     }

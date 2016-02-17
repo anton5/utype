@@ -95,6 +95,8 @@ public class Location implements Character.EventListener {
 
     private void startBattle() {
 
+        captureInput();
+
         battle = new Battle(currentPlayer, monster);
 
         battle.start();

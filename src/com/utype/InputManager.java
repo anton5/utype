@@ -6,14 +6,19 @@ import java.awt.event.KeyListener;
 public class InputManager implements KeyListener {
     private static final String CARET_INDICATOR = ">";
 
+    private static final InputManager sManager = new InputManager();
+
     private EventListener listener;
     private boolean isRunning;
     private StringBuilder commandBuffer = new StringBuilder();
-
+    private boolean isDirectModeEnabled = false;
     private StringBuilder getCommandBuffer() {
         return commandBuffer;
     }
 
+    public static InputManager getInstance() {
+        return sManager;
+    }
     private void setCommandBuffer(StringBuilder commandBuffer) {
         this.commandBuffer = commandBuffer;
     }
@@ -24,6 +29,14 @@ public class InputManager implements KeyListener {
 
     public void setListener(EventListener listener) {
         this.listener = listener;
+    }
+
+    public boolean isDirectModeEnabled() {
+        return isDirectModeEnabled;
+    }
+
+    public void setDirectModeEnabled(boolean directModeEnabled) {
+        isDirectModeEnabled = directModeEnabled;
     }
 
     public void start() {
@@ -37,6 +50,15 @@ public class InputManager implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         if (!isRunning) {
+            return;
+        }
+
+        if (isDirectModeEnabled) {
+
+            notifyListenerWithString(String.valueOf(e.getKeyChar()));
+
+            Logger.logToInputField(CARET_INDICATOR);
+
             return;
         }
 

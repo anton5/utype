@@ -1,5 +1,6 @@
 package com.utype.battle;
 
+import com.utype.InputManager;
 import com.utype.Logger;
 import com.utype.characters.Character;
 import com.utype.characters.Monster;
@@ -30,6 +31,7 @@ public class Battle {
         isGoing = true;
 
         UIManager.setAuxiliaryVisible(true);
+        InputManager.getInstance().setDirectModeEnabled(true);
 
         Logger.logln(String.format("Battle between %s and %s has started", player.getName(), monster.getName()));
     }
@@ -37,12 +39,14 @@ public class Battle {
     public void finish() {
 
         UIManager.setAuxiliaryVisible(false);
+        InputManager.getInstance().setDirectModeEnabled(false);
 
         isGoing = false;
     }
 
     public void processInput(String input) {
 
-        Logger.loglnToAuxiliaryTextComponent("You hit monster very hard");
+        Logger.clearAuxiliaryTextComponent();
+        Logger.loglnToAuxiliaryTextComponent("You hit monster very hard " + input);
     }
 }
