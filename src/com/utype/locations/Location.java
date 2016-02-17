@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Location implements Character.EventListener {
+    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.5f;
 
     private Map<Direction, Location> locations = new HashMap<>();
     private Monster monster;
@@ -124,7 +125,7 @@ public class Location implements Character.EventListener {
             return;
         }
 
-        if (Math.random() > 1) {
+        if (Math.random() > MONSTER_ENCOUNTER_PROBABILITY) {
 
             monster = Monster.getRandomMonster();
             return;
