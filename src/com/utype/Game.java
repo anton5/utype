@@ -34,21 +34,50 @@ public class Game implements Runnable, InputManager.EventListener {
 
     @Override
     public void run() {
-        Location room1 = new PiPuzzleRoom("Room 1");
-        Location room2 = new CoordinatesPuzzle("Room 2");
-        Location room3 = new MatrixRoom("Matrix room");
-        Location room4 = new Location("Room 4");
-        Location hall = new Location("Main hall");
+        Location entry = new EntryRoom("the entry room");
+        Location lightRed = new LightRedRoom("the light red room");
+        Location red = new RedRoom("the red room");
+        Location control = new ControlRoom("the control room");
+        Location green = new GreenRoom("the green room");
+        Location lightGreen = new LightGreenRoom("the light green room");
+        Location lightBlue = new LightBlueRoom("the light blue room");
+        Location blue = new BlueRoom("the blue room");
+        Location yellow = new YellowRoom("the yellow room");
+        Location black = new BlackRoom("the black room");
+        Location boss = new BossRoom("the boss room");
 
-        hall.setLocationInDirection(Location.Direction.NORTH, room1);
-        room1.setLocationInDirection(Location.Direction.NORTH, room2);
-        room2.setLocationInDirection(Location.Direction.EAST, room3);
-        room3.setLocationInDirection(Location.Direction.SOUTH, room4);
-        room4.setLocationInDirection(Location.Direction.WEST, hall);
+        entry.setLocationInDirection(Location.Direction.WEST, red);
+        lightRed.setLocationInDirection(Location.Direction.EAST, red);
+        lightRed.setLocationInDirection(Location.Direction.SOUTH, lightBlue);
+        red.setLocationInDirection(Location.Direction.NORTH, entry);
+        red.setLocationInDirection(Location.Direction.EAST, control);
+        red.setLocationInDirection(Location.Direction.SOUTH, blue);
+        red.setLocationInDirection(Location.Direction.WEST, lightRed);
+        control.setLocationInDirection(Location.Direction.WEST, green);
+        control.setLocationInDirection(Location.Direction.EAST, red);
+        green.setLocationInDirection(Location.Direction.NORTH, entry);
+        green.setLocationInDirection(Location.Direction.EAST, lightGreen);
+        green.setLocationInDirection(Location.Direction.SOUTH, yellow);
+        green.setLocationInDirection(Location.Direction.WEST, control);
+        lightGreen.setLocationInDirection(Location.Direction.SOUTH, yellow);
+        lightGreen.setLocationInDirection(Location.Direction.WEST, green);
+        lightBlue.setLocationInDirection(Location.Direction.NORTH, lightRed);
+        lightBlue.setLocationInDirection(Location.Direction.EAST, blue);
+        blue.setLocationInDirection(Location.Direction.NORTH, red);
+        blue.setLocationInDirection(Location.Direction.EAST, yellow);
+        blue.setLocationInDirection(Location.Direction.SOUTH, black);
+        blue.setLocationInDirection(Location.Direction.WEST, lightBlue);
+        yellow.setLocationInDirection(Location.Direction.NORTH, green);
+        yellow.setLocationInDirection(Location.Direction.EAST, lightGreen);
+        yellow.setLocationInDirection(Location.Direction.SOUTH, black);
+        yellow.setLocationInDirection(Location.Direction.WEST, blue);
+        black.setLocationInDirection(Location.Direction.EAST, boss);
+        black.setLocationInDirection(Location.Direction.WEST, blue);
+        boss.setLocationInDirection(Location.Direction.WEST, black);
 
         Logger.logln("You start at the Main hall, type 'n' 'w' 'e' or 's' to navigate, 'c' to show current location.");
 
-        player.setCurrentLocation(hall);
+        player.setCurrentLocation(entry);
     }
 
     @Override
@@ -95,7 +124,7 @@ public class Game implements Runnable, InputManager.EventListener {
 
         switch (command) {
             case SHOW_LOCATION:
-                Logger.logln("You are at " + player.getCurrentLocation().getName());
+                Logger.logln("You are in " + player.getCurrentLocation().getName() + ".");
                 break;
         }
 

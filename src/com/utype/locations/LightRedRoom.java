@@ -1,7 +1,7 @@
 package com.utype.locations;
 
-/**
- * Created by USER on 2016-02-09.
- */
-public class LightRedRoom {
+public class LightRedRoom extends Location {
+    public LightRedRoom(String name) {
+        super(name, null, null, null, null);
+    }
 }

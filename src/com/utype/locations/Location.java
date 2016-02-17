@@ -122,7 +122,7 @@ public class Location implements Character.EventListener {
             return;
         }
 
-        if (Math.random() > 0.7) {
+        if (Math.random() > 1) {
 
             monster = Monster.getRandomMonster();
             return;

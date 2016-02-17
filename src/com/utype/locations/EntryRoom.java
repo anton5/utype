@@ -1,7 +1,7 @@
 package com.utype.locations;
 
-/**
- * Created by USER on 2016-02-09.
- */
-public class EntryRoom {
+public class EntryRoom extends Location {
+    public EntryRoom(String name) {
+        super(name, null, null, null, null);
+    }
 }

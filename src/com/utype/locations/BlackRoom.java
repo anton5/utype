@@ -1,7 +1,7 @@
 package com.utype.locations;
 
-/**
- * Created by USER on 2016-02-09.
- */
-public class BlackRoom {
+public class BlackRoom extends Location {
+    public BlackRoom(String name) {
+        super(name, null, null, null, null);
+    }
 }
