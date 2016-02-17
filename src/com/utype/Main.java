@@ -6,7 +6,7 @@ import com.utype.ui.UIManager;
 
 public class Main {
     public static void main(String[] args) {
-        InputManager inputManager = new InputManager();
+        InputManager inputManager = InputManager.getInstance();
         MainFrame frame = new MainFrame();
         Player player = new Player("John Smith", 100);
         Game game = new Game(player);

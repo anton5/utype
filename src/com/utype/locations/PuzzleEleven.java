@@ -73,6 +73,7 @@ public class PuzzleEleven extends Location {
 
         isFinished = check(guess);
 
+
         return true;
     }
 

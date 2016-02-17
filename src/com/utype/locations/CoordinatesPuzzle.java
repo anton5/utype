@@ -24,6 +24,8 @@ public class CoordinatesPuzzle extends Location {
 
         isFinished = false;
 
+        captureInput();
+
         Logger.logln("YOU: Ok, I need to enter the coordinates to proceed to the rendezvous point");
         Logger.logln("YOU: Ollie, can you help me out a little?");
         Logger.logln("CM: Yeah, you gotta enter 'x' in order to achieve 'y=20'. According to my calculations the number is somewhere in the range of 30 to 50");
@@ -32,6 +34,10 @@ public class CoordinatesPuzzle extends Location {
 
     @Override
     public boolean processInput(String input) {
+
+        if (super.processInput(input)) {
+            return true;
+        }
 
         if (isFinished) {
             return false;
@@ -47,6 +53,10 @@ public class CoordinatesPuzzle extends Location {
         }
 
         isFinished = check(guess);
+
+        if (isFinished) {
+            releaseInput();
+        }
 
         return true;
     }
