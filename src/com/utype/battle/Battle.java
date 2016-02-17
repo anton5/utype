@@ -11,11 +11,17 @@ import com.utype.ui.UIManager;
  * <p/>
  * Created by Roman Laitarenko on 2/10/16.
  */
-public class Battle {
+public class Battle implements CatchLettersMinigame.EventListener {
 
     private Character player;
     private Monster monster;
+
+    private CatchLettersMinigame minigame = new CatchLettersMinigame();
     private boolean isGoing;
+
+    {
+        minigame.setListener(this);
+    }
 
     public Battle(Character player, Monster monster) {
         this.player = player;
@@ -34,6 +40,8 @@ public class Battle {
         InputManager.getInstance().setDirectModeEnabled(true);
 
         Logger.logln(String.format("Battle between %s and %s has started", player.getName(), monster.getName()));
+
+        minigame.start();
     }
 
     public void finish() {
@@ -46,7 +54,16 @@ public class Battle {
 
     public void processInput(String input) {
 
-        Logger.clearAuxiliaryTextComponent();
-        Logger.loglnToAuxiliaryTextComponent("You hit monster very hard " + input);
+        minigame.processInput(input);
+    }
+
+    @Override
+    public void onLetterCaught() {
+        Logger.logln("Letter caught");
+    }
+
+    @Override
+    public void onLetterMissed() {
+        Logger.logln("Letter missed");
     }
 }
