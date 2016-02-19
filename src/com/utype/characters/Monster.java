@@ -18,7 +18,7 @@ public class Monster extends Character {
     }
 
     public static Monster getRandomMonster() {
-        return new Monster(UUID.randomUUID().toString(), 1000);
+        return new Monster(UUID.randomUUID().toString(), 100);
     }
 
     @Override

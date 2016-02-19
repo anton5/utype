@@ -1,6 +1,7 @@
 package com.utype.characters;
 
 import com.sun.javafx.beans.annotations.NonNull;
+import com.utype.Logger;
 import com.utype.locations.Location;
 
 /**
@@ -14,7 +15,7 @@ public abstract class Character {
 
     private String name;
     private int health;
-    private int skill; // ???
+    private int skill = 1; // ???
 
     private EventListener listener;
     private Location currentLocation;
@@ -62,6 +63,14 @@ public abstract class Character {
         return health;
     }
 
+    private void setHealth(int health) {
+        this.health = health;
+
+        if (this.health < 0) {
+            die();
+        }
+    }
+
     public abstract int getBaseDamage();
 
     public int getSkill() {
@@ -70,6 +79,8 @@ public abstract class Character {
 
     public void increaseSkill() {
         this.skill += 1;
+
+        Logger.logln(String.format("%s just received skill upgrade: %d", getName(), skill));
     }
 
     public boolean isDead() {
@@ -80,6 +91,16 @@ public abstract class Character {
         health = 0;
 
         notifyListenerWithDeath();
+    }
+
+    public void hit(@NonNull Character character) {
+
+        final int damage = getBaseDamage() + getSkill();
+        final int newHealth = character.getHealth() - damage;
+
+        Logger.logln(String.format("%s got hit by %s. Damage %d points", character.getName(), getName(), damage));
+
+        character.setHealth(newHealth);
     }
 
     public abstract boolean move(@NonNull Location.Direction direction);

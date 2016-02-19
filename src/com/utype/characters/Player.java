@@ -45,7 +45,7 @@ public class Player extends Character {
     public void die() {
         super.die();
 
-        Logger.logln("You took a wrong turn and died. Game over.");
+        Logger.logln("You died. Game over.");
     }
 
     public boolean move(@NonNull Location.Direction direction) {

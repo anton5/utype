@@ -4,6 +4,7 @@ import com.utype.InputManager;
 import com.utype.Logger;
 import com.utype.characters.Character;
 import com.utype.characters.Monster;
+import com.utype.characters.Player;
 import com.utype.ui.UIManager;
 
 /**
@@ -50,6 +51,13 @@ public class Battle implements CatchLettersMinigame.EventListener {
         InputManager.getInstance().setDirectModeEnabled(false);
 
         isGoing = false;
+        minigame.stop();
+
+        Logger.logln(String.format("Battle between %s and %s has ended", player.getName(), monster.getName()));
+
+        if (!player.isDead()) {
+            player.increaseSkill();
+        }
     }
 
     public void processInput(String input) {
@@ -59,11 +67,13 @@ public class Battle implements CatchLettersMinigame.EventListener {
 
     @Override
     public void onLetterCaught() {
-        Logger.logln("Letter caught");
+
+        player.hit(monster);
     }
 
     @Override
     public void onLetterMissed() {
-        Logger.logln("Letter missed");
+
+        monster.hit(player);
     }
 }

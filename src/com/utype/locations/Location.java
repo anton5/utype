@@ -128,6 +128,7 @@ public class Location implements Character.EventListener {
         if (Math.random() > MONSTER_ENCOUNTER_PROBABILITY) {
 
             monster = Monster.getRandomMonster();
+            monster.setListener(this);
             return;
         }
 
@@ -171,6 +172,9 @@ public class Location implements Character.EventListener {
     @Override
     public void onCharacterDidDie(Character character) {
 
+        releaseInput();
+
+        battle.finish();
     }
 
     public enum Direction {
