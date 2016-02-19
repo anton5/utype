@@ -95,7 +95,10 @@ public abstract class Character {
 
     public void hit(@NonNull Character character) {
 
-        final int damage = getBaseDamage() + getSkill();
+        int damage = getBaseDamage() + getSkill();
+
+        damage = (int) (damage * Math.max(Math.random(), 0.5));
+
         final int newHealth = character.getHealth() - damage;
 
         Logger.logln(String.format("%s got hit by %s. Damage %d points", character.getName(), getName(), damage));
