@@ -39,6 +39,10 @@ public class MainFrame extends JFrame {
             }
         });
 
+        Font font = new Font("monospaced", Font.PLAIN, 14);
+        getMainTextPane().setFont(font);
+        getInputTextField().setFont(font);
+
         ((DefaultCaret) getMainTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         ((DefaultCaret) getAuxiliaryTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
