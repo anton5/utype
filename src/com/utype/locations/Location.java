@@ -16,6 +16,7 @@ public class Location implements Character.EventListener {
     private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.75f;
 
     private Map<Direction, Location> locations = new HashMap<>();
+    private Map<Direction, Boolean> locks = new HashMap<>();
     private Monster monster;
     private Player currentPlayer;
     private Battle battle;
@@ -39,6 +40,15 @@ public class Location implements Character.EventListener {
         locations.put(Direction.WEST, west);
         locations.put(Direction.SOUTH, south);
         locations.put(Direction.EAST, east);
+
+        locks.put(Direction.NORTH, false);
+        locks.put(Direction.WEST, false);
+        locks.put(Direction.SOUTH, false);
+        locks.put(Direction.EAST, false);
+    }
+
+    public void setLockInDirection(@NonNull Direction direction, boolean isLocked) {
+        locks.put(direction, isLocked);
     }
 
     public String getName() {
@@ -47,6 +57,9 @@ public class Location implements Character.EventListener {
 
     @Nullable
     public Location getLocationInDirection(@NonNull Direction direction) {
+        if (locks.get(direction)) {
+            return null;
+        }
         return locations.get(direction);
     }
 

@@ -60,6 +60,7 @@ public class Game implements Runnable, InputManager.EventListener {
         control.setLocationInDirection(Location.Direction.NORTH, entry);
         control.setLocationInDirection(Location.Direction.EAST, green);
         control.setLocationInDirection(Location.Direction.WEST, red);
+        control.setLockInDirection(Location.Direction.EAST, true);
 
         green.setLocationInDirection(Location.Direction.NORTH, entry);
         green.setLocationInDirection(Location.Direction.EAST, lightGreen);
@@ -74,10 +75,13 @@ public class Game implements Runnable, InputManager.EventListener {
         blue.setLocationInDirection(Location.Direction.EAST, yellow);
         blue.setLocationInDirection(Location.Direction.SOUTH, black);
         blue.setLocationInDirection(Location.Direction.WEST, lightBlue);
+        blue.setLockInDirection(Location.Direction.EAST, true);
+        blue.setLockInDirection(Location.Direction.SOUTH, true);
 
         yellow.setLocationInDirection(Location.Direction.NORTH, green);
         yellow.setLocationInDirection(Location.Direction.EAST, lightGreen);
         yellow.setLocationInDirection(Location.Direction.SOUTH, black);
+        yellow.setLockInDirection(Location.Direction.SOUTH, true);
 
         black.setLocationInDirection(Location.Direction.EAST, boss);
         black.setLocationInDirection(Location.Direction.WEST, blue);
