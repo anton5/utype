@@ -28,6 +28,7 @@ public class PiPuzzleRoom extends Location {
         captureInput();
 
         Logger.loglnToAuxiliaryTextComponent(CLUE + "_ _");
+
         Logger.loglnToAuxiliaryTextComponent("YOU: Can you read this Ollie?");
         Logger.loglnToAuxiliaryTextComponent("CM: I can see a sequence of numbers on the screen followed by two blank spaces.");
         Logger.loglnToAuxiliaryTextComponent("It would seem that to proceed, the two digits missing should be entered");
