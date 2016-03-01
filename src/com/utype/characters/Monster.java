@@ -41,4 +41,9 @@ public class Monster extends Character {
 
         return false;
     }
+
+    @Override
+    public void onDamageMade(Character enemy, int damage) {
+        Logger.logln(String.format("You got hit by the %s. Damage is %d points.", getName(), damage));
+    }
 }

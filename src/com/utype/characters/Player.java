@@ -60,4 +60,9 @@ public class Player extends Character {
 
         return true;
     }
+
+    @Override
+    public void onDamageMade(Character enemy, int damage) {
+        Logger.logln(String.format("You hit the %s. Damage is %d points.", enemy.getName(), damage));
+    }
 }

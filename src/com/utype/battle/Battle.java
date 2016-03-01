@@ -25,7 +25,7 @@ public class Battle implements CatchLettersMinigame.EventListener {
     }
 
     public Battle(Character player, Monster monster) {
-        this.player = player;
+        this.player =  player;
         this.monster = monster;
     }
 
@@ -40,7 +40,7 @@ public class Battle implements CatchLettersMinigame.EventListener {
         UIManager.setAuxiliaryVisible(true);
         InputManager.getInstance().setDirectModeEnabled(true);
 
-        Logger.logln(String.format("Battle between %s and %s has started", player.getName(), monster.getName()));
+        Logger.logln(String.format("Battle between you and %s has started.", monster.getName()));
 
         minigame.start();
     }
@@ -53,7 +53,7 @@ public class Battle implements CatchLettersMinigame.EventListener {
         isGoing = false;
         minigame.stop();
 
-        Logger.logln(String.format("Battle between %s and %s has ended", player.getName(), monster.getName()));
+        Logger.logln(String.format("Battle between you and %s has ended.", monster.getName()));
 
         if (!player.isDead()) {
             player.increaseSkill();
