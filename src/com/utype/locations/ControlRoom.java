@@ -17,7 +17,7 @@ public class ControlRoom extends Location implements Runnable {
     static final int MILLISECONDS_OF_SLEEP = 200; // Delay between lines in millisecond
     static final String CODE = "CODE";
 
-    private boolean isRunning = false;
+    private boolean isRunning = true;
     private Thread thread;
     private Thread messageThread;
 
@@ -27,9 +27,8 @@ public class ControlRoom extends Location implements Runnable {
 
     @Override
     public void onCharacterDidEnter(Character character) {
-
-        UIManager.setAuxiliaryVisible(true);
-
+        super.onCharacterDidEnter(character);
+        
         restartGame();
     }
 
@@ -70,9 +69,15 @@ public class ControlRoom extends Location implements Runnable {
     }
 
     private void restartGame() {
+
+        if (!isRunning) {
+            return;
+        }
+
+        UIManager.setAuxiliaryVisible(true);
+
         thread = new Thread(this);
 
-        isRunning = true;
         thread.start();
 
         captureInput();
