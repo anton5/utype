@@ -80,7 +80,7 @@ public abstract class Character {
     public void increaseSkill() {
         this.skill += 1;
 
-        Logger.logln(String.format("%s just received skill upgrade: %d", getName(), skill));
+        Logger.logln(String.format("You have just received skill upgrade: %d.", skill));
     }
 
     public boolean isDead() {
@@ -101,9 +101,12 @@ public abstract class Character {
 
         final int newHealth = character.getHealth() - damage;
 
-        Logger.logln(String.format("The %s got hit by %s. Damage %d points.", character.getName(), getName(), damage));
+        onDamageMade(character, damage);
 
         character.setHealth(newHealth);
+    }
+
+    public void onDamageMade(Character enemy, int damage) {
     }
 
     public abstract boolean move(@NonNull Location.Direction direction);
