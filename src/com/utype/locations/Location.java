@@ -146,7 +146,7 @@ public class Location implements Character.EventListener {
 
         if (monster != null && !monster.isDead()) {
 
-            Logger.logln("There is " + monster.getName() + " right ahead of you");
+            Logger.logln("There is a " + monster.getName() + " right ahead of you.");
             Logger.logln("Do you want to fight(f) or dodge(d)?");
 
             captureInput();
