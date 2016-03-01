@@ -56,6 +56,7 @@ public class MainFrame extends JFrame {
 
         getAuxiliaryTextPane().setFocusable(false);
         getMainTextPane().setFocusable(false);
+        getInputTextField().setFocusable(false);
         setFocusable(true);
     }
 
