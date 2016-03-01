@@ -17,7 +17,6 @@ public class UIManager {
         UIManager.isAuxiliaryVisible = isAuxiliaryVisible;
 
         frame.getAuxiliaryPanel().setVisible(isAuxiliaryVisible);
-        frame.getMainTextPane().setEnabled(!isAuxiliaryVisible);
     }
 
 }
