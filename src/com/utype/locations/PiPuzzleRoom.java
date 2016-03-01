@@ -31,6 +31,9 @@ public class PiPuzzleRoom extends Location {
         Logger.loglnToAuxiliaryTextComponent("YOU: Can you read this Ollie?");
         Logger.loglnToAuxiliaryTextComponent("CM: I can see a sequence of numbers on the screen followed by two blank spaces.");
         Logger.loglnToAuxiliaryTextComponent("It would seem that to proceed, the two digits missing should be entered");
+        Logger.loglnToAuxiliaryTextComponent("It sure seems weird though to me that we can understand these numbers");
+        Logger.loglnToAuxiliaryTextComponent("YOU: Maybe then that means that the numbers I have to enter and therefore the sequence would make sense to us or maybe even all intergalactic habitants");
+        Logger.loglnToAuxiliaryTextComponent("There are some numeric sequences I can think of that could fit that prescription...");
     }
 
     @Override
