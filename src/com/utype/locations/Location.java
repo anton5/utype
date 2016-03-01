@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Location implements Character.EventListener {
-    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.5f;
+    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.75f;
 
     private Map<Direction, Location> locations = new HashMap<>();
     private Monster monster;
@@ -52,10 +52,6 @@ public class Location implements Character.EventListener {
 
     public void setLocationInDirection(@NonNull Direction direction, @Nullable Location location) {
         locations.put(direction, location);
-
-        if (location.getLocationInDirection(direction.opposite()) != this) {
-            location.setLocationInDirection(direction.opposite(), this);
-        }
     }
 
     public boolean processInput(String input) {
@@ -75,7 +71,7 @@ public class Location implements Character.EventListener {
 
             currentPlayer.setDodgedCurrentMonster(true);
 
-            Logger.logln("You have decided to dodge " + monster.getName());
+            Logger.logln("You have decided to dodge the " + monster.getName() + ".");
 
             releaseInput();
 
