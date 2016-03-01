@@ -35,10 +35,10 @@ public class YellowRoom extends Location {
 
         Logger.logln("YOU: I get a sequence of numbers which then disappears.");
         Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
-        Logger.logln("YOU: There are many artifacts in here which appear to be in sets.");
+        Logger.logln("YOU: There are. I thought of a number which could be the key");
         //if(player has found the clues then enter this line:){
-        Logger.logln("YOU: All are in sets of eleven");
-        Logger.logln("CM: I would guess then that eleven is the key. But how?");
+        //Logger.logln("YOU: All are in sets of eleven");
+        //Logger.logln("CM: I would guess then that eleven is the key. But how?");
         //}
         Logger.logln("YOU: Let me try it again.");
     }

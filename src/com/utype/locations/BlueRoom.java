@@ -31,6 +31,8 @@ public class BlueRoom extends Location {
         Logger.loglnToAuxiliaryTextComponent("YOU: Can you read this Ollie?");
         Logger.loglnToAuxiliaryTextComponent("CM: I can see a sequence of numbers on the screen followed by two blank spaces.");
         Logger.loglnToAuxiliaryTextComponent("It would seem that to proceed, the two digits missing should be entered");
+        Logger.loglnToAuxiliaryTextComponent("It is weird that the numbers can be understood by us. Maybe the sequence also should make some sense to us or the whole intergalactic universe even");
+        Logger.loglnToAuxiliaryTextComponent("YOU: That could be true. I have some sequences in mind that could fit the bill. I'll give it a try");
     }
 
     @Override
