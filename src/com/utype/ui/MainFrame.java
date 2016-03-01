@@ -39,10 +39,18 @@ public class MainFrame extends JFrame {
             }
         });
 
+        Font font = new Font("monospaced", Font.PLAIN, 14);
+        getMainTextPane().setFont(font);
+        getInputTextField().setFont(font);
+
         ((DefaultCaret) getMainTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         ((DefaultCaret) getAuxiliaryTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-        setPreferredSize(new Dimension(800, 600));
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            setPreferredSize(new Dimension(800, 700));
+        } else {
+            setPreferredSize(new Dimension(800, 600));
+        }
 
         Dimension d = getAuxiliaryTextPane().getSize();
         getAuxiliaryTextPane().setMaximumSize(d);
@@ -56,6 +64,7 @@ public class MainFrame extends JFrame {
 
         getAuxiliaryTextPane().setFocusable(false);
         getMainTextPane().setFocusable(false);
+        getInputTextField().setFocusable(false);
         setFocusable(true);
     }
 

@@ -13,9 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Location implements Character.EventListener {
-    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.5f;
+    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.75f;
 
     private Map<Direction, Location> locations = new HashMap<>();
+    private Map<Direction, Boolean> locks = new HashMap<>();
     private Monster monster;
     private Player currentPlayer;
     private Battle battle;
@@ -39,6 +40,15 @@ public class Location implements Character.EventListener {
         locations.put(Direction.WEST, west);
         locations.put(Direction.SOUTH, south);
         locations.put(Direction.EAST, east);
+
+        locks.put(Direction.NORTH, false);
+        locks.put(Direction.WEST, false);
+        locks.put(Direction.SOUTH, false);
+        locks.put(Direction.EAST, false);
+    }
+
+    public void setLockInDirection(@NonNull Direction direction, boolean isLocked) {
+        locks.put(direction, isLocked);
     }
 
     public String getName() {
@@ -47,15 +57,14 @@ public class Location implements Character.EventListener {
 
     @Nullable
     public Location getLocationInDirection(@NonNull Direction direction) {
+        if (locks.get(direction)) {
+            return null;
+        }
         return locations.get(direction);
     }
 
     public void setLocationInDirection(@NonNull Direction direction, @Nullable Location location) {
         locations.put(direction, location);
-
-        if (location.getLocationInDirection(direction.opposite()) != this) {
-            location.setLocationInDirection(direction.opposite(), this);
-        }
     }
 
     public boolean processInput(String input) {
@@ -75,7 +84,7 @@ public class Location implements Character.EventListener {
 
             currentPlayer.setDodgedCurrentMonster(true);
 
-            Logger.logln("You have decided to dodge " + monster.getName());
+            Logger.logln("You have decided to dodge the " + monster.getName() + ".");
 
             releaseInput();
 
@@ -146,7 +155,7 @@ public class Location implements Character.EventListener {
 
         if (monster != null && !monster.isDead()) {
 
-            Logger.logln("There is " + monster.getName() + " right ahead of you");
+            Logger.logln("There is a " + monster.getName() + " right ahead of you.");
             Logger.logln("Do you want to fight(f) or dodge(d)?");
 
             captureInput();
@@ -174,7 +183,9 @@ public class Location implements Character.EventListener {
 
         releaseInput();
 
-        battle.finish();
+        if (battle != null) {
+            battle.finish();
+        }
     }
 
     public enum Direction {

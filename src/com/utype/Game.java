@@ -47,35 +47,48 @@ public class Game implements Runnable, InputManager.EventListener {
         Location boss = new BossRoom("the boss room");
 
         entry.setLocationInDirection(Location.Direction.WEST, red);
+        entry.setLocationInDirection(Location.Direction.SOUTH, control);
+
         lightRed.setLocationInDirection(Location.Direction.EAST, red);
         lightRed.setLocationInDirection(Location.Direction.SOUTH, lightBlue);
+
         red.setLocationInDirection(Location.Direction.NORTH, entry);
         red.setLocationInDirection(Location.Direction.EAST, control);
         red.setLocationInDirection(Location.Direction.SOUTH, blue);
         red.setLocationInDirection(Location.Direction.WEST, lightRed);
-        control.setLocationInDirection(Location.Direction.WEST, green);
-        control.setLocationInDirection(Location.Direction.EAST, red);
+
+        control.setLocationInDirection(Location.Direction.NORTH, entry);
+        control.setLocationInDirection(Location.Direction.EAST, green);
+        control.setLocationInDirection(Location.Direction.WEST, red);
+        control.setLockInDirection(Location.Direction.EAST, true);
+
         green.setLocationInDirection(Location.Direction.NORTH, entry);
         green.setLocationInDirection(Location.Direction.EAST, lightGreen);
         green.setLocationInDirection(Location.Direction.SOUTH, yellow);
-        green.setLocationInDirection(Location.Direction.WEST, control);
+
         lightGreen.setLocationInDirection(Location.Direction.SOUTH, yellow);
         lightGreen.setLocationInDirection(Location.Direction.WEST, green);
         lightBlue.setLocationInDirection(Location.Direction.NORTH, lightRed);
         lightBlue.setLocationInDirection(Location.Direction.EAST, blue);
+
         blue.setLocationInDirection(Location.Direction.NORTH, red);
         blue.setLocationInDirection(Location.Direction.EAST, yellow);
         blue.setLocationInDirection(Location.Direction.SOUTH, black);
         blue.setLocationInDirection(Location.Direction.WEST, lightBlue);
+        blue.setLockInDirection(Location.Direction.EAST, true);
+        blue.setLockInDirection(Location.Direction.SOUTH, true);
+
         yellow.setLocationInDirection(Location.Direction.NORTH, green);
         yellow.setLocationInDirection(Location.Direction.EAST, lightGreen);
         yellow.setLocationInDirection(Location.Direction.SOUTH, black);
-        yellow.setLocationInDirection(Location.Direction.WEST, blue);
+        yellow.setLockInDirection(Location.Direction.SOUTH, true);
+
         black.setLocationInDirection(Location.Direction.EAST, boss);
         black.setLocationInDirection(Location.Direction.WEST, blue);
+
         boss.setLocationInDirection(Location.Direction.WEST, black);
 
-        Logger.logln("You start at the Main hall, type 'n' 'w' 'e' or 's' to navigate, 'c' to show current location.");
+        Logger.logln("You start at the Main hall, type 'n', 'w', 'e' or 's' to navigate, 'c' to show current location.");
 
         player.setCurrentLocation(entry);
     }
@@ -109,7 +122,7 @@ public class Game implements Runnable, InputManager.EventListener {
 
             if (!player.move(direction)) {
 
-                Logger.logln("Cannot go there");
+                Logger.logln("It seems there is no way in that direction.");
 
                 if (player.dodgedCurrentMonster()) {
                     player.die();
@@ -118,7 +131,6 @@ public class Game implements Runnable, InputManager.EventListener {
                 return;
             }
 
-            Logger.logln(player.getName() + " now in " + player.getCurrentLocation().getName());
             return;
         }
 

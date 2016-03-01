@@ -4,6 +4,7 @@ import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.locations.Location;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -18,7 +19,14 @@ public class Monster extends Character {
     }
 
     public static Monster getRandomMonster() {
-        return new Monster(UUID.randomUUID().toString(), 100);
+        String[] monsterNames = {
+                "tall green robot",
+                "humanoid with one eye",
+                "robot with a long manipulator",
+                "R2D2-like robot",
+                "caterpillar-like robot"
+        };
+        return new Monster(monsterNames[new Random().nextInt(monsterNames.length)], 50);
     }
 
     @Override

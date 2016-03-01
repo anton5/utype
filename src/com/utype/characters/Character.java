@@ -101,7 +101,7 @@ public abstract class Character {
 
         final int newHealth = character.getHealth() - damage;
 
-        Logger.logln(String.format("%s got hit by %s. Damage %d points", character.getName(), getName(), damage));
+        Logger.logln(String.format("The %s got hit by %s. Damage %d points.", character.getName(), getName(), damage));
 
         character.setHealth(newHealth);
     }
