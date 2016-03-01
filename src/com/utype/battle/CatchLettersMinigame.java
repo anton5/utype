@@ -13,8 +13,8 @@ import java.util.Random;
  */
 public class CatchLettersMinigame implements Runnable {
 
-    private static final int ROWS = 15;
-    private static final int COLUMNS = 49;
+    private static final int ROWS = 12;
+    private static final int COLUMNS = 47;
 
     private final Map<Integer, String> lettersPool = new HashMap<>();
     private String currentLetter;
