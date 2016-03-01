@@ -174,7 +174,9 @@ public class Location implements Character.EventListener {
 
         releaseInput();
 
-        battle.finish();
+        if (battle != null) {
+            battle.finish();
+        }
     }
 
     public enum Direction {
