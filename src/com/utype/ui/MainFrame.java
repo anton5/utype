@@ -46,7 +46,11 @@ public class MainFrame extends JFrame {
         ((DefaultCaret) getMainTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         ((DefaultCaret) getAuxiliaryTextPane().getCaret()).setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
-        setPreferredSize(new Dimension(800, 600));
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            setPreferredSize(new Dimension(800, 700));
+        } else {
+            setPreferredSize(new Dimension(800, 600));
+        }
 
         Dimension d = getAuxiliaryTextPane().getSize();
         getAuxiliaryTextPane().setMaximumSize(d);
