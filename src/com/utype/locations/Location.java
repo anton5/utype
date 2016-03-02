@@ -177,6 +177,7 @@ public class Location implements Character.EventListener {
     @Override
     public void onCharacterDidExitBattle(Character character, Character enemy) {
 
+        startPuzzleIfNeeded();
     }
 
     @Override
@@ -194,21 +195,6 @@ public class Location implements Character.EventListener {
         WEST,
         SOUTH,
         EAST;
-
-        public Direction opposite() {
-            switch (this) {
-                case NORTH:
-                    return SOUTH;
-                case WEST:
-                    return EAST;
-                case SOUTH:
-                    return NORTH;
-                case EAST:
-                    return WEST;
-            }
-
-            return null;
-        }
 
         public static Direction directionFromCommand(Parser.Command command) {
 

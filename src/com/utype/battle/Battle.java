@@ -58,6 +58,8 @@ public class Battle implements CatchLettersMinigame.EventListener {
         if (!player.isDead()) {
             player.increaseSkill();
         }
+
+        player.notifyListenerWithExitBattle(monster);
     }
 
     public void processInput(String input) {
