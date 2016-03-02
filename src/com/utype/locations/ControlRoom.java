@@ -137,6 +137,8 @@ public class ControlRoom extends Location implements Runnable {
                         e.printStackTrace();
                     }
                 }
+
+                isRunning = true;
                 restartGame();
             }
         });
@@ -260,6 +262,10 @@ public class ControlRoom extends Location implements Runnable {
                 codeIndex = 0;
             }
 
+            if (coolDown == 5) {
+                linesQueue.addFirst(Logger.wrapStringInColor(new String(new char[WIDTH / 2 + 10]).replace("\0", "- "),
+                        Logger.TextColor.BLACK));
+            }
             Logger.clearAuxiliaryTextComponent();
 
             Logger.loglnToAuxiliaryTextComponent("Try to figure out how to get access to this thing");
