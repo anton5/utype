@@ -19,6 +19,7 @@ public class BlueRoom extends Location {
     @Override
     protected void startPuzzleIfNeeded() {
 
+
         if (isFinished) {
             return;
         }

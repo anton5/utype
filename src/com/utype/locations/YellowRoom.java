@@ -33,7 +33,7 @@ public class YellowRoom extends Location {
 
         printClue();
 
-        Logger.logln("This room has many sides. On each side there is a mural depicting a constellation of each zodiac sign,");
+        /*Logger.logln("This room has many sides. On each side there is a mural depicting a constellation of each zodiac sign,");
         Logger.logln("all except cancer. A giant crab is painted on the floor.");
         Logger.logln("the ship has its origins from a star in that constellation? In each corner there are small pillars representing obelisks.");
         Logger.logln("The ceiling has a painting of something that looks like the goddess of justice represented in a deck of tarot cards.");
@@ -46,7 +46,7 @@ public class YellowRoom extends Location {
         //Logger.logln("YOU: All are in sets of eleven");
         //Logger.logln("CM: I would guess then that eleven is the key. But how?");
         //}
-        Logger.logln("YOU: Let me try it again.");
+        Logger.logln("YOU: Let me try it again.");*/
     }
 
     @Override
