@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Location implements Character.EventListener {
-    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.75f;
+    private static final float MONSTER_ENCOUNTER_PROBABILITY = 0.85f;
 
     private Map<Direction, Location> locations = new HashMap<>();
     private Map<Direction, Boolean> locks = new HashMap<>();
@@ -134,7 +134,7 @@ public class Location implements Character.EventListener {
             return;
         }
 
-        if (Math.random() > MONSTER_ENCOUNTER_PROBABILITY) {
+        if (!(this instanceof BossRoom) && Math.random() > MONSTER_ENCOUNTER_PROBABILITY) {
 
             monster = Monster.getRandomMonster();
             monster.setListener(this);
@@ -157,6 +157,7 @@ public class Location implements Character.EventListener {
 
             Logger.logln("There is a " + monster.getName() + " right ahead of you.");
             Logger.logln("Do you want to fight(f) or dodge(d)?");
+            Logger.logln("Keep in mind that if you dodge and try to go to a closed direction you will die.");
 
             captureInput();
         }

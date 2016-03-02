@@ -26,7 +26,7 @@ public class Monster extends Character {
                 "R2D2-like robot",
                 "caterpillar-like robot"
         };
-        return new Monster(monsterNames[new Random().nextInt(monsterNames.length)], 50);
+        return new Monster(monsterNames[new Random().nextInt(monsterNames.length)], 40);
     }
 
     @Override
