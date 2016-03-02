@@ -129,7 +129,7 @@ public abstract class Character {
         }
     }
 
-    private void notifyListenerWithExitBattle(Character enemy) {
+    public void notifyListenerWithExitBattle(Character enemy) {
         if (getListener() != null) {
             getListener().onCharacterDidExitBattle(this, enemy);
         }
