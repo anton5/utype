@@ -86,11 +86,6 @@ public class YellowRoom extends Location {
     }
 
     public boolean check(int guess) {
-
-
-        //printClue();
-
-
         if (guess != ANSWER) {
             Logger.logln("YOU: That doesn't seem to be the correct sequence, I'll try again.");
             printClue();
@@ -114,21 +109,27 @@ public class YellowRoom extends Location {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+                int i = 0;
                 for (String num : numbers.split(" ")) {
-                    Logger.loglnToAuxiliaryTextComponent("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                    Logger.loglnToAuxiliaryTextComponent(num);
+                    Logger.clearAuxiliaryTextComponent();
+
+                    String spaces = "";
+                    for (int k = 0; k < i; k++) {
+                        spaces += " ";
+                    }
+                    i++;
+                    Logger.loglnToAuxiliaryTextComponent(spaces + num);
+
                     try {
                         TimeUnit.MILLISECONDS.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-
-                Logger.loglnToAuxiliaryTextComponent("SYSTEM: Enter sequence:");
+                Logger.clearAuxiliaryTextComponent();
+                Logger.loglnToAuxiliaryTextComponent("Enter sequence");
             }
         });
         t.start();
-
-
     }
 }
