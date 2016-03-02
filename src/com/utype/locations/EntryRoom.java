@@ -9,6 +9,7 @@ public class EntryRoom extends Location {
     private static final int ANSWER = 42;
 
     private boolean isFinished;
+    private boolean waitsForEnter;
 
     public EntryRoom(String name) {
         super(name);
@@ -32,6 +33,13 @@ public class EntryRoom extends Location {
             return true;
         }
 
+        if (waitsForEnter) {
+
+            onEnterPressed();
+
+            return true;
+        }
+
         if (isFinished) {
             return false;
         }
@@ -49,9 +57,29 @@ public class EntryRoom extends Location {
 
         if (isFinished) {
             releaseInput();
+
+            showNext();
         }
 
         return true;
+    }
+
+    private void showNext() {
+
+        waitsForEnter = true;
+
+        captureInput();
+
+        Logger.logln("Press enter to continue");
+    }
+
+    private void onEnterPressed() {
+
+        releaseInput();
+        
+        waitsForEnter = false;
+
+        Logger.logln("Entering the first room. Oxygen levels appear to be a little lower than on earth according to the readings but still the place seems habitable. No harmful gases. You take your helmet off. The place is pitch black, except for a light coming out of your pocket. You search the pocket (inventory comes up) and find that your torchlight has been on and its light has started to wane. Regardless you take it out of the pocket, the place is lit up and our hero is in a small room with doorways to the “west” and the “south”. There also is a locked door to the “east”. There is a button on the far side of the room. You press it and the place illuminates. You should turn off your torchlight before you proceed.");
     }
 
     public boolean check(int guess) {
@@ -78,7 +106,6 @@ public class EntryRoom extends Location {
                     "\n" +
                     "Damn! I’m pulled into it… it seems it’s got some kind of tractor beam!\n" +
                     "By now the pod is pulled with great force towards the unidentified ship. The ship seems to have a tractor beam of some sort which pulls the pod closer to it. At last the pod docks and you are faced with an airlock to enter the alien ship.\n\n");
-            Logger.logln("Entering the first room. Oxygen levels appear to be a little lower than on earth according to the readings but still the place seems habitable. No harmful gases. You take your helmet off. The place is pitch black, except for a light coming out of your pocket. You search the pocket (inventory comes up) and find that your torchlight has been on and its light has started to wane. Regardless you take it out of the pocket, the place is lit up and our hero is in a small room with doorways to the “west” and the “south”. There also is a locked door to the “east”. There is a button on the far side of the room. You press it and the place illuminates. You should turn off your torchlight before you proceed.");
             //the door is opened
             return true;
         }
