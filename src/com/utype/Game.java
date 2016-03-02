@@ -103,6 +103,8 @@ public class Game implements Runnable, InputManager.EventListener {
             return;
         }
 
+        Logger.logln(InputManager.CARET_INDICATOR + input);
+
         // give chance for the current location to process the input
         if (player.getCurrentLocation().holdsInput()) {
 
