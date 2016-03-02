@@ -128,7 +128,7 @@ public class Location implements Character.EventListener {
         isHoldingInput = false;
     }
 
-    private void rollTheMonster() {
+    protected void rollTheMonster() {
 
         if (monster != null) {
             return;
