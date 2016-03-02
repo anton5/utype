@@ -59,6 +59,11 @@ public class CatchLettersMinigame implements Runnable {
 
     public void processInput(String input) {
 
+        // ignore enter presses
+        if (input.equals("\n")) {
+            return;
+        }
+
         if (currentLetter.equals(input)) {
 
             rollNextLetter();
