@@ -131,6 +131,8 @@ public class ControlRoom extends Location implements Runnable {
                         e.printStackTrace();
                     }
                 }
+
+                isRunning = true;
                 restartGame();
             }
         });
