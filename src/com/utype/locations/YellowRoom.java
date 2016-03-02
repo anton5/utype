@@ -39,7 +39,6 @@ public class YellowRoom extends Location {
         Logger.logln("The ceiling has a painting of something that looks like the goddess of justice represented in a deck of tarot cards.");
         Logger.logln("In the centre of the room there appears to be another console and a screen. There are open doorways to the “north”, “east” and “west”.");
         Logger.logln("A locked door on the “south side”.");
-
         Logger.logln("YOU: I get a sequence of numbers which then disappears.");
         Logger.logln("CM: It seems to ask for a sequence of numbers in return. Are there any clues in the room?");
         Logger.logln("YOU: There are. I thought of a number which could be the key");
