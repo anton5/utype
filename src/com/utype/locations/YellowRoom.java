@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class YellowRoom extends Location {
 
-    private static final String numbers = "9 4 2 5 5 3 6 7";
-    private static final int ANSWER = 27966854;
+    private static final String numbers = "9 4 2 5";
+    private static final int ANSWER = 2796;
 
     private boolean isFinished;
 
