@@ -79,7 +79,7 @@ public class EntryRoom extends Location {
         
         waitsForEnter = false;
 
-        Logger.logln("Entering the first room. Oxygen levels appear to be a little lower than on earth according to the readings but still the place seems habitable. No harmful gases. You take your helmet off. The place is pitch black, except for a light coming out of your pocket. You search the pocket (inventory comes up) and find that your torchlight has been on and its light has started to wane. Regardless you take it out of the pocket, the place is lit up and our hero is in a small room with doorways to the “west” and the “south”. There also is a locked door to the “east”. There is a button on the far side of the room. You press it and the place illuminates. You should turn off your torchlight before you proceed.");
+        Logger.logln("Entering the first room. Oxygen levels appear to be a little lower than on earth according to the readings but still the place seems habitable. No harmful gases. You take your helmet off. The place is pitch black, except for a light coming out of your pocket. You search the pocket and find that your torchlight has been on and its light has started to wane. Regardless you take it out of the pocket, the place is lit up and our hero is in a small room with doorways to the “west” and the “south”. There also is a locked door to the “east”. There is a button on the far side of the room. You press it and the place illuminates. You should turn off your torchlight before you proceed.");
     }
 
     public boolean check(int guess) {
@@ -102,7 +102,7 @@ public class EntryRoom extends Location {
             Logger.logln("As the pod approaches the asteroid, its shape appears to be a disc, too perfect to be anything but artificial. As the pod closes in you try to contact your crewmate.\n" +
                     "YOU: Ollie can you copy? Can you see this?\n" +
                     "CM: Yeah! That’s a friggin flying saucer! Like the one from the old crappy movies!\n" +
-                    "JS: I’m gonna return to the station! We gotta fix the transmitter problem and report this to base…\n" +
+                    "YOU: I’m gonna return to the station! We gotta fix the transmitter problem and report this to base…\n" +
                     "\n" +
                     "Damn! I’m pulled into it… it seems it’s got some kind of tractor beam!\n" +
                     "By now the pod is pulled with great force towards the unidentified ship. The ship seems to have a tractor beam of some sort which pulls the pod closer to it. At last the pod docks and you are faced with an airlock to enter the alien ship.\n\n");
