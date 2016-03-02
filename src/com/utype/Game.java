@@ -88,8 +88,6 @@ public class Game implements Runnable, InputManager.EventListener {
 
         boss.setLocationInDirection(Location.Direction.WEST, black);
 
-        Logger.logln("You start at the Main hall, type 'n', 'w', 'e' or 's' to navigate, 'c' to show current location.");
-
         player.setCurrentLocation(entry);
     }
 
