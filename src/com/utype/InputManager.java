@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class InputManager implements KeyListener {
-    private static final String CARET_INDICATOR = "> ";
+    public static final String CARET_INDICATOR = "> ";
 
     private static final InputManager sManager = new InputManager();
 

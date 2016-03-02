@@ -28,6 +28,7 @@ public class ControlRoom extends Location implements Runnable {
     @Override
     public void onCharacterDidEnter(Character character) {
         super.onCharacterDidEnter(character);
+
         /*Logger.logln("There are open doorways on the “north” and “west” sides of the room. The door on the “eastern” side is locked.\n" +
                 "There is a great illuminated screen on the south side supported by a console. The console appears to be some sort of keyboard but the keys don’t make any sense.");
 
@@ -35,8 +36,17 @@ public class ControlRoom extends Location implements Runnable {
                 "CM: Can’t say that I do. You could try hitting a random key, I mean… what could go wrong?\n" +
                 "YOU: Yeah… anyway not much I can do, either I push something now and hope for the best or I go explore some more and probably die fighting a robot or something. But I think I’m going to need to interact with it at some point.\n" +
                 "YOU:Well, here goes nothing…\n");*/
-        
+
         restartGame();
+    }
+
+    @Override
+    protected void rollTheMonster() {
+        if (isRunning) {
+            return;
+        }
+
+        super.rollTheMonster();
     }
 
     @Override
