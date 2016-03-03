@@ -3,13 +3,8 @@ package com.utype.locations;
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.characters.Character;
-import com.utype.characters.Player;
 
-/**
- * Created by Sakis on 29/01/2016.
- */
 public class CoordinatesPuzzle extends Location {
-
     private static final int CLUE = 20;
     private static final int ANSWER = 42;
 
@@ -21,7 +16,6 @@ public class CoordinatesPuzzle extends Location {
 
     @Override
     public void onCharacterDidEnter(Character character) {
-
         isFinished = false;
 
         captureInput();
@@ -34,7 +28,6 @@ public class CoordinatesPuzzle extends Location {
 
     @Override
     public boolean processInput(String input) {
-
         if (super.processInput(input)) {
             return true;
         }
@@ -62,39 +55,27 @@ public class CoordinatesPuzzle extends Location {
     }
 
     public boolean check(int guess) {
-
         if (guess > 50 || guess < 30) {
             Logger.logln("Only enter a number in the range of 30 to 50");
         }
 
         if (guess != ANSWER) {
-            Logger.logln("SYSTEM: F(" + guess + ") = " + calc(guess)); //"SYSTEM:f("+guess+ ") = " + calc(guess)
+            Logger.logln("SYSTEM: F(" + guess + ") = " + calc(guess));
             Logger.logln("YOU:That is not correct. F(x) must be equal to 20. This seems like normal distribution... A bell graph...");
         }
 
         if (guess == ANSWER) {
-
             Logger.logln("SYSTEM: F(" + guess + ") = " + calc(guess));
             Logger.logln("YOU: Ok Ollie, I've got the coordinates, I'm moving on towards the asteroid");
-            //the door is opened
             return true;
         }
 
         return false;
     }
 
-
     public double calc(int guess) {
-
         double exp = (Math.pow((-(guess - 42)), 2)) / 2;
+
         return (Math.pow(1.5, exp)) / 0.05;
-
     }
-
 }
-        /*double exp = -(Math.pow((guess-42), 2))/2;
-        return (Math.pow(1.5,exp))/0.05;*/
-
-//(1.5^((-(x-42)^2)/2))/0.05
-
-

@@ -93,7 +93,6 @@ public class Game implements Runnable, InputManager.EventListener {
 
     @Override
     public void onReceiveUserInput(String input) {
-
         if (player.isDead()) {
 
             Logger.logln("Game over, dude!");
@@ -139,6 +138,5 @@ public class Game implements Runnable, InputManager.EventListener {
                 Logger.logln("You are in " + player.getCurrentLocation().getName() + ".");
                 break;
         }
-
     }
 }

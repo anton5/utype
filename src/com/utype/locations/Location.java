@@ -33,7 +33,6 @@ public class Location implements Character.EventListener {
                     Location west,
                     Location south,
                     Location east) {
-
         this.name = name;
 
         locations.put(Direction.NORTH, north);
@@ -68,8 +67,6 @@ public class Location implements Character.EventListener {
     }
 
     public boolean processInput(String input) {
-
-
         if (battle != null && battle.isGoing()) {
 
             battle.processInput(input);
@@ -79,9 +76,7 @@ public class Location implements Character.EventListener {
 
         Parser.Command command = Parser.parse(input);
 
-
         if (command == Parser.Command.DODGE) {
-
             currentPlayer.setDodgedCurrentMonster(true);
 
             Logger.logln("You have decided to dodge the " + monster.getName() + ".");
@@ -94,7 +89,6 @@ public class Location implements Character.EventListener {
         }
 
         if (command == Parser.Command.FIGHT) {
-
             startBattle();
 
             return true;
@@ -104,7 +98,6 @@ public class Location implements Character.EventListener {
     }
 
     private void startBattle() {
-
         captureInput();
 
         battle = new Battle(currentPlayer, monster);
@@ -113,7 +106,6 @@ public class Location implements Character.EventListener {
     }
 
     protected void startPuzzleIfNeeded() {
-
     }
 
     public boolean holdsInput() {
@@ -129,13 +121,11 @@ public class Location implements Character.EventListener {
     }
 
     protected void rollTheMonster() {
-
         if (monster != null) {
             return;
         }
 
         if (!(this instanceof BossRoom) && Math.random() > MONSTER_ENCOUNTER_PROBABILITY) {
-
             monster = Monster.getRandomMonster();
             monster.setListener(this);
             return;
@@ -146,7 +136,6 @@ public class Location implements Character.EventListener {
 
     @Override
     public void onCharacterDidEnter(Character character) {
-
         currentPlayer = (Player) character;
 
         Logger.logln("You have entered " + getName() + ".");
@@ -154,7 +143,6 @@ public class Location implements Character.EventListener {
         rollTheMonster();
 
         if (monster != null && !monster.isDead()) {
-
             Logger.logln("There is a " + monster.getName() + " right ahead of you.");
             Logger.logln("Do you want to fight(f) or dodge(d)?");
             Logger.logln("Keep in mind that if you dodge and try to go to a closed direction you will die.");
@@ -165,24 +153,20 @@ public class Location implements Character.EventListener {
 
     @Override
     public void onCharacterDidExit(Character character) {
-
         currentPlayer = null;
     }
 
     @Override
     public void onCharacterDidEnterBattle(Character character, Character enemy) {
-
     }
 
     @Override
     public void onCharacterDidExitBattle(Character character, Character enemy) {
-
         startPuzzleIfNeeded();
     }
 
     @Override
     public void onCharacterDidDie(Character character) {
-
         releaseInput();
 
         if (battle != null) {
@@ -197,7 +181,6 @@ public class Location implements Character.EventListener {
         EAST;
 
         public static Direction directionFromCommand(Parser.Command command) {
-
             switch (command) {
                 case GO_NORTH:
                     return NORTH;

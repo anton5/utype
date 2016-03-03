@@ -15,8 +15,6 @@ public class UIManager {
 
     public static void setAuxiliaryVisible(boolean isAuxiliaryVisible) {
         UIManager.isAuxiliaryVisible = isAuxiliaryVisible;
-
         frame.getAuxiliaryPanel().setVisible(isAuxiliaryVisible);
     }
-
 }

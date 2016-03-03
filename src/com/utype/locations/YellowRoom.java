@@ -2,14 +2,11 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.characters.Character;
-import com.utype.characters.Player;
 import com.utype.ui.UIManager;
 
 import java.util.concurrent.TimeUnit;
 
 public class YellowRoom extends Location {
-
     private static final String numbers = "9 4 2 5";
     private static final int ANSWER = 2796;
 
@@ -51,7 +48,6 @@ public class YellowRoom extends Location {
 
     @Override
     public boolean processInput(String input) {
-
         if (super.processInput(input)) {
             return true;
         }
@@ -61,7 +57,6 @@ public class YellowRoom extends Location {
         }
 
         if (isFinished && input.isEmpty()) { // enter pressed
-
             Logger.clearAuxiliaryTextComponent();
             Logger.logln("You have successfully finished eleven puzzle");
             UIManager.setAuxiliaryVisible(false);
@@ -81,7 +76,6 @@ public class YellowRoom extends Location {
 
         isFinished = check(guess);
 
-
         return true;
     }
 
@@ -89,11 +83,9 @@ public class YellowRoom extends Location {
         if (guess != ANSWER) {
             Logger.logln("YOU: That doesn't seem to be the correct sequence, I'll try again.");
             printClue();
-
         }
 
         if (guess == ANSWER) {
-
             Logger.loglnToAuxiliaryTextComponent("YOU: OK! I got it, every number on the sequence shown plus every number in the entered sequence should add up to 11");
             Logger.logToAuxiliaryTextComponent("Press 'Enter' to continue");
 

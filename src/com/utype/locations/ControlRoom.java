@@ -3,17 +3,15 @@ package com.utype.locations;
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.characters.Character;
-import com.utype.characters.Player;
 import com.utype.ui.UIManager;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class ControlRoom extends Location implements Runnable {
-    static final int WIDTH = 70;        // Width of terminal window - 1
-    static final int FLIPS_PER_LINE = 5;    // No. of columns changed per line
+    static final int WIDTH = 70;                  // Width of terminal window - 1
+    static final int FLIPS_PER_LINE = 5;          // No. of columns changed per line
     static final int MILLISECONDS_OF_SLEEP = 200; // Delay between lines in millisecond
     static final String CODE = "CODE";
 
@@ -51,7 +49,6 @@ public class ControlRoom extends Location implements Runnable {
 
     @Override
     public boolean processInput(String input) {
-
         if (super.processInput(input)) {
             return true;
         }
@@ -86,7 +83,6 @@ public class ControlRoom extends Location implements Runnable {
     }
 
     private void restartGame() {
-
         if (!isRunning) {
             return;
         }

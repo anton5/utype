@@ -4,7 +4,6 @@ import com.utype.Logger;
 import com.utype.characters.Character;
 
 public class GreenRoom extends Location {
-
     public GreenRoom(String name) {
         super(name);
     }

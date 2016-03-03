@@ -4,19 +4,13 @@ import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
 import com.utype.locations.Location;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 2/9/16.
- */
 public abstract class Character {
     public static final int PLAYER_BASE_DAMAGE = 10;
     public static final int MONSTER_BASE_DAMAGE = 10;
 
     private String name;
     private int health;
-    private int skill = 1; // ???
-
+    private int skill = 1;
     private EventListener listener;
     private Location currentLocation;
 
@@ -39,7 +33,6 @@ public abstract class Character {
     }
 
     public void setCurrentLocation(@NonNull Location currentLocation) {
-
         if (this.currentLocation == currentLocation) {
             return;
         }
@@ -94,7 +87,6 @@ public abstract class Character {
     }
 
     public void hit(@NonNull Character character) {
-
         int damage = getBaseDamage() + getSkill();
 
         damage = (int) (damage * Math.max(Math.random(), 0.5));
@@ -106,6 +98,7 @@ public abstract class Character {
         character.setHealth(newHealth);
     }
 
+    // to ve overridden in derived classes
     public void onDamageMade(Character enemy, int damage) {
     }
 
@@ -143,13 +136,9 @@ public abstract class Character {
 
     public interface EventListener {
         void onCharacterDidEnter(Character character);
-
         void onCharacterDidExit(Character character);
-
         void onCharacterDidEnterBattle(Character character, Character enemy);
-
         void onCharacterDidExitBattle(Character character, Character enemy);
-
         void onCharacterDidDie(Character character);
     }
 }

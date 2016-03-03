@@ -2,8 +2,6 @@ package com.utype.locations;
 
 import com.sun.javafx.beans.annotations.NonNull;
 import com.utype.Logger;
-import com.utype.characters.Character;
-import com.utype.characters.Player;
 import com.utype.ui.UIManager;
 
 public class BlueRoom extends Location {
@@ -18,8 +16,6 @@ public class BlueRoom extends Location {
 
     @Override
     protected void startPuzzleIfNeeded() {
-
-
         if (isFinished) {
             return;
         }
@@ -38,7 +34,6 @@ public class BlueRoom extends Location {
 
     @Override
     public boolean processInput(String input) {
-
         if (super.processInput(input)) {
             return true;
         }
@@ -66,7 +61,6 @@ public class BlueRoom extends Location {
         }
 
         isFinished = check(guess);
-
 
         return true;
     }

@@ -7,13 +7,7 @@ import com.utype.locations.Location;
 
 import java.util.HashMap;
 
-/**
- * U-type
- *
- * Created by Roman Laitarenko on 1/22/16.
- */
 public class Player extends Character {
-
     private boolean dodgedCurrentMonster;
     private HashMap<String, Loot> loot;
 
@@ -49,7 +43,6 @@ public class Player extends Character {
     }
 
     public boolean move(@NonNull Location.Direction direction) {
-
         Location destination = getCurrentLocation().getLocationInDirection(direction);
 
         if (destination == null) {

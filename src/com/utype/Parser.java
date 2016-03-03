@@ -5,9 +5,7 @@ import com.sun.javafx.beans.annotations.NonNull;
 import java.util.EnumSet;
 
 public class Parser {
-
     public enum Command {
-
         // navigation
         GO_NORTH("n"),
         GO_WEST("w"),
@@ -36,10 +34,7 @@ public class Parser {
     }
 
     public static Command parse(@NonNull String string) {
-
-
         for (int i = 0; i < Command.values().length; i++) {
-
             Command command = Command.values()[i];
 
             if (string.equals(command.toString())) {

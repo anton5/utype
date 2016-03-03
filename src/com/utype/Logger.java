@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.text.*;
 import java.awt.*;
 import java.util.HashMap;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,32 +34,26 @@ public class Logger {
     }
 
     public static void log(@NonNull String string) {
-
         mainTextComponent.setText(mainTextComponent.getText() + string);
     }
 
     public static void loglnToAuxiliaryTextComponent(@Nullable String input) {
-
         logToAuxiliaryTextComponent((input == null ? "" : input) + "\n");
     }
 
     public static void clearAuxiliaryTextComponent() {
-
         auxiliaryTextComponent.setText(null);
     }
 
     public static void logToAuxiliaryTextComponent(@Nullable String input) {
-
         auxiliaryTextComponent.setText(auxiliaryTextComponent.getText() + input);
     }
 
     public static void logToInputField(@Nullable String input) {
-
         inputTextComponent.setText(input);
     }
 
     public static String wrapStringInColor(@NonNull String string, TextColor color) {
-
         return color.toString() + string + color.toString();
     }
 
@@ -78,7 +71,6 @@ public class Logger {
         }
 
         public static TextColor randomColor() {
-
             return TextColor.values()[ (int )(Math.random() * TextColor.values().length)];
         }
 
@@ -93,7 +85,6 @@ public class Logger {
 
         @Nullable
         public static TextColor getColorFromString(String string) {
-
             TextColor defaultColor = WHITE;
             string = string.replaceAll(COLOR_ESCAPE_STRING, "");
 
@@ -108,7 +99,6 @@ public class Logger {
             TextColor[] colors = TextColor.values();
 
             for (int i = 0; i < colors.length; i++) {
-
                 TextColor color = colors[i];
 
                 if (color.hashCode() == hash) {
@@ -121,7 +111,6 @@ public class Logger {
     }
 
     private final static class CustomDocumentFilter extends DocumentFilter {
-
         private final StyledDocument styledDocument = ((JTextPane) auxiliaryTextComponent).getStyledDocument();
 
         private HashMap<TextColor, AttributeSet> textColorAttributeSets = new HashMap<TextColor, AttributeSet>();
@@ -133,7 +122,6 @@ public class Logger {
             TextColor[] colors = TextColor.values();
 
             for (int i = 0; i < colors.length; i++) {
-
                 TextColor color = colors[i];
 
                 Font font = new Font("monospaced", Font.PLAIN, 14);
@@ -151,7 +139,6 @@ public class Logger {
         @Override
         public void insertString(FilterBypass fb, int offset, String text, AttributeSet attributeSet) throws BadLocationException {
             super.insertString(fb, offset, text, attributeSet);
-
             updateTextStyles();
         }
 
@@ -169,7 +156,6 @@ public class Logger {
             TextColor currentColor = null;
 
             while (matcher.find()) {
-
                 if (!startFound) {
                     startFound = true;
                     currentStart = matcher.start();
@@ -202,9 +188,7 @@ public class Logger {
                 }
 
                 matcher = pattern.matcher(auxiliaryTextComponent.getText());
-
             }
         }
     }
-
 }

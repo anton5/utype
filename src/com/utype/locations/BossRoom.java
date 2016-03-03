@@ -4,7 +4,6 @@ import com.utype.Logger;
 import com.utype.characters.Character;
 
 public class BossRoom extends Location {
-
     public BossRoom(String name) {
         super(name);
     }
@@ -21,12 +20,10 @@ public class BossRoom extends Location {
 
     @Override
     protected void rollTheMonster() {
-        // we don't have final fight currently
     }
 
     @Override
     public boolean processInput(String input) {
-
         return true;
     }
 }

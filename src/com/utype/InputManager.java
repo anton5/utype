@@ -12,6 +12,7 @@ public class InputManager implements KeyListener {
     private boolean isRunning;
     private StringBuilder commandBuffer = new StringBuilder();
     private boolean isDirectModeEnabled = false;
+
     private StringBuilder getCommandBuffer() {
         return commandBuffer;
     }
@@ -19,6 +20,7 @@ public class InputManager implements KeyListener {
     public static InputManager getInstance() {
         return sManager;
     }
+
     private void setCommandBuffer(StringBuilder commandBuffer) {
         this.commandBuffer = commandBuffer;
     }
@@ -54,7 +56,6 @@ public class InputManager implements KeyListener {
         }
 
         if (isDirectModeEnabled) {
-
             notifyListenerWithString(String.valueOf(e.getKeyChar()));
 
             Logger.logToInputField(CARET_INDICATOR);

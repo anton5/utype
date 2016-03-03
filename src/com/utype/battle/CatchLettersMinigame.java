@@ -1,18 +1,11 @@
 package com.utype.battle;
 
 import com.utype.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * U-type
- * <p/>
- * Created by Roman Laitarenko on 2/17/16.
- */
 public class CatchLettersMinigame implements Runnable {
-
     private static final int ROWS = 12;
     private static final int COLUMNS = 47;
 
@@ -20,10 +13,8 @@ public class CatchLettersMinigame implements Runnable {
     private String currentLetter;
     private int currentLetterRow;
     private int currentLetterColumn;
-
     private Random random = new Random();
     private boolean stopRequested;
-
     private EventListener listener;
 
     {
@@ -48,24 +39,20 @@ public class CatchLettersMinigame implements Runnable {
     }
 
     public void start() {
-
         new Thread(this).start();
     }
 
     public void stop() {
-
         stopRequested = true;
     }
 
     public void processInput(String input) {
-
         // ignore enter presses
         if (input.equals("\n")) {
             return;
         }
 
         if (currentLetter.equals(input)) {
-
             rollNextLetter();
             notifyListenerWithLetterCaught();
 
@@ -76,7 +63,6 @@ public class CatchLettersMinigame implements Runnable {
     }
 
     private void rollNextLetter() {
-
         int letterColumnIndex = random.nextInt(lettersPool.size());
         String row = lettersPool.get(letterColumnIndex);
         int letterRowIndex = random.nextInt(row.length());
@@ -89,16 +75,13 @@ public class CatchLettersMinigame implements Runnable {
 
     @Override
     public void run() {
-
         while (true) {
-
             if (stopRequested) {
                 break;
             }
 
             String buffer = "";
             for (int i = 0; i < ROWS; i++) {
-
                 StringBuilder template = new StringBuilder(new String(new char[COLUMNS]).replace("\0", "_ "));
 
                 if (i == currentLetterRow) {
@@ -107,14 +90,12 @@ public class CatchLettersMinigame implements Runnable {
 
                 buffer = buffer + template.toString() + "\n";
             }
-
             Logger.clearAuxiliaryTextComponent();
             Logger.logToAuxiliaryTextComponent(buffer);
 
             currentLetterRow += 1;
 
             if (currentLetterRow > ROWS) {
-
                 rollNextLetter();
                 notifyListenerWithLetterMissed();
 
@@ -130,23 +111,19 @@ public class CatchLettersMinigame implements Runnable {
     }
 
     public void notifyListenerWithLetterCaught() {
-
         if (getListener() != null) {
             getListener().onLetterCaught();
         }
     }
 
     public void notifyListenerWithLetterMissed() {
-
         if (getListener() != null) {
             getListener().onLetterMissed();
         }
     }
 
     public interface EventListener {
-
         void onLetterCaught();
-
         void onLetterMissed();
     }
 }
